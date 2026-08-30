@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mumbai Indians fan website - One Family">
-    <title>Mumbai Indians | One Family</title>
 
 ```
+<meta name="description" content="Mumbai Indians fan website - One Family">
+
+<title>Mumbai Indians | One Family</title>
+
 <link rel="stylesheet" href="css_style.css">
+
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 ```
@@ -17,12 +20,15 @@
 
 <body>
 
+<!-- ================= NAVBAR ================= -->
+
 <header class="navbar">
-    <a href="index.html" class="logo">
-        <img src="images/logo.png" alt="Mumbai Indians Logo">
-    </a>
 
 ```
+<a href="index.html" class="logo">
+    <img src="images/logo.png" alt="Mumbai Indians Logo">
+</a>
+
 <div class="brand">
     <span>MUMBAI INDIANS</span>
     <small>#OneFamily</small>
@@ -30,157 +36,585 @@
 
 <nav>
     <a href="index.html" class="active">Home</a>
-    <a href="about.html">About</a>
+    <a href="matches.html">Matches</a>
     <a href="#trophies">Trophies</a>
-    <a href="#contact">Contact</a>
+    <a href="about.html">About</a>
+    <a href="store.html">Store</a>
     <a href="login.html" class="login-btn">Login</a>
 </nav>
 ```
 
 </header>
 
+<!-- ================= HERO ================= -->
+
 <main>
 
 <section class="hero">
-    <div class="hero-overlay"></div>
 
 ```
-<div class="hero-content">
-    <p class="eyebrow">ONE FAMILY • ONE LEGACY</p>
+<div class="hero-overlay"></div>
 
-    <h1>MUMBAI<br><span>INDIANS</span></h1>
+<div class="hero-content">
+
+    <p class="eyebrow">
+        ONE FAMILY • ONE LEGACY
+    </p>
+
+    <h1>
+        MUMBAI<br>
+        <span>INDIANS</span>
+    </h1>
 
     <p class="hero-text">
-        Celebrating the passion, victories and unforgettable moments
+        Experience the passion, history and unforgettable moments
         of Mumbai Indians.
     </p>
 
     <div class="hero-buttons">
-        <a href="#trophies" class="primary-btn">Explore Legacy</a>
-        <a href="about.html" class="secondary-btn">About Team</a>
+
+        <a href="matches.html" class="primary-btn">
+            Explore Matches
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+        <a href="#trophies" class="secondary-btn">
+            View Legacy
+        </a>
+
     </div>
+
 </div>
 ```
 
 </section>
 
-<section class="intro">
-    <p class="section-tag">THE LEGACY</p>
-    <h2>A Journey Built on <span>Victory</span></h2>
+<!-- ================= QUICK STATS ================= -->
+
+<section class="stats-section">
+
+```
+<div class="stat-box">
+    <strong>5</strong>
+    <span>IPL TITLES</span>
+</div>
+
+<div class="stat-box">
+    <strong>2013</strong>
+    <span>FIRST TITLE</span>
+</div>
+
+<div class="stat-box">
+    <strong>2020</strong>
+    <span>FIFTH TITLE</span>
+</div>
+
+<div class="stat-box">
+    <strong>#ONEFAMILY</strong>
+    <span>THE MI SPIRIT</span>
+</div>
+```
+
+</section>
+
+<!-- ================= LIVE SCORE ================= -->
+
+<section class="score-section">
+
+```
+<div class="section-heading">
+
+    <p class="section-tag">MATCH CENTRE</p>
+
+    <h2>
+        Live <span>Score</span>
+    </h2>
+
     <p>
-        From the first championship to five unforgettable IPL titles,
-        every trophy represents teamwork, determination and the spirit
-        of the Mumbai Indians family.
+        Follow Mumbai Indians matches, results and upcoming fixtures.
     </p>
+
+</div>
+
+
+<div class="score-card">
+
+    <div class="score-header">
+        <span class="live-dot"></span>
+        <span>LIVE / LATEST MATCH</span>
+    </div>
+
+    <div class="teams">
+
+        <div class="team">
+            <img src="images/logo.png" alt="Mumbai Indians">
+            <h3>MUMBAI INDIANS</h3>
+        </div>
+
+        <div class="vs">
+            VS
+        </div>
+
+        <div class="team">
+            <div class="opponent-logo">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3>OPPONENT</h3>
+        </div>
+
+    </div>
+
+    <div class="score-info">
+        <span>Match information will appear here</span>
+    </div>
+
+    <a href="matches.html" class="score-button">
+        View Match Centre
+        <i class="fa-solid fa-arrow-right"></i>
+    </a>
+
+</div>
+```
+
 </section>
 
-<section class="trophies" id="trophies">
+<!-- ================= UPCOMING MATCHES ================= -->
+
+<section class="matches-preview">
+
+```
+<div class="section-heading">
+
+    <p class="section-tag">FIXTURES</p>
+
+    <h2>
+        Upcoming <span>Matches</span>
+    </h2>
+
+    <p>
+        Check match schedules, venues and ticket information.
+    </p>
+
+</div>
+
+
+<div class="match-grid">
+
+    <article class="match-card">
+
+        <div class="match-date">
+            <span>UPCOMING</span>
+            <strong>MI</strong>
+        </div>
+
+        <div class="match-teams">
+            <div>
+                <img src="images/logo.png" alt="Mumbai Indians">
+                <span>Mumbai Indians</span>
+            </div>
+
+            <b>VS</b>
+
+            <div>
+                <div class="small-team-logo">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <span>Opponent</span>
+            </div>
+        </div>
+
+        <div class="match-details">
+            <p>
+                <i class="fa-regular fa-calendar"></i>
+                Schedule coming soon
+            </p>
+
+            <p>
+                <i class="fa-solid fa-location-dot"></i>
+                Venue to be announced
+            </p>
+        </div>
+
+        <div class="match-actions">
+            <a href="matches.html">View Details</a>
+            <a href="matches.html">Book Tickets</a>
+        </div>
+
+    </article>
+
+
+    <article class="match-card featured-match">
+
+        <div class="match-date">
+            <span>FIXTURES</span>
+            <strong>MI</strong>
+        </div>
+
+        <div class="match-teams">
+
+            <div>
+                <img src="images/logo.png" alt="Mumbai Indians">
+                <span>Mumbai Indians</span>
+            </div>
+
+            <b>VS</b>
+
+            <div>
+                <div class="small-team-logo">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <span>Opponent</span>
+            </div>
+
+        </div>
+
+        <div class="match-details">
+
+            <p>
+                <i class="fa-regular fa-clock"></i>
+                Match schedule
+            </p>
+
+            <p>
+                <i class="fa-solid fa-location-dot"></i>
+                Match venue
+            </p>
+
+        </div>
+
+        <div class="match-actions">
+            <a href="matches.html">View Schedule</a>
+            <a href="matches.html">Tickets</a>
+        </div>
+
+    </article>
+
+</div>
+
+
+<a href="matches.html" class="view-all">
+    View Full Schedule
+    <i class="fa-solid fa-arrow-right"></i>
+</a>
+```
+
+</section>
+
+<!-- ================= TROPHIES ================= -->
+
+<section class="intro" id="trophies">
+
+```
+<p class="section-tag">THE LEGACY</p>
+
+<h2>
+    Five Titles. One <span>Legacy.</span>
+</h2>
+
+<p>
+    Every championship represents determination, teamwork and
+    the unforgettable spirit of the Mumbai Indians family.
+</p>
+```
+
+</section>
+
+<section class="trophies">
 
 ```
 <div class="trophy-card">
+
     <div class="card-image">
-        <img src="images/i3.webp" alt="Mumbai Indians 2013 Trophy">
+
+        <img src="images/i3.webp"
+             alt="Mumbai Indians 2013 Trophy">
+
         <span>01</span>
+
     </div>
 
     <div class="card-content">
+
         <p class="year">2013</p>
+
         <h3>First Trophy</h3>
+
         <p>
-            Mumbai Indians defeated CSK at Eden Gardens, Kolkata,
-            under the captaincy of Rohit Sharma.
+            Mumbai Indians lifted their first IPL title in a
+            memorable final against Chennai Super Kings.
         </p>
-        <a href="#">Explore <i class="fa-solid fa-arrow-right"></i></a>
+
+        <a href="about.html">
+            Explore
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
     </div>
+
 </div>
 
 
 <div class="trophy-card">
+
     <div class="card-image">
-        <img src="images/i5.webp" alt="Mumbai Indians 2015 Trophy">
+
+        <img src="images/i5.webp"
+             alt="Mumbai Indians 2015 Trophy">
+
         <span>02</span>
+
     </div>
 
     <div class="card-content">
+
         <p class="year">2015</p>
+
         <h3>Second Trophy</h3>
+
         <p>
-            Another memorable victory against CSK at Eden Gardens,
-            Kolkata, under Rohit Sharma.
+            Mumbai Indians secured their second IPL championship
+            with another unforgettable victory.
         </p>
-        <a href="#">Explore <i class="fa-solid fa-arrow-right"></i></a>
+
+        <a href="about.html">
+            Explore
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
     </div>
+
 </div>
 
 
 <div class="trophy-card">
+
     <div class="card-image">
-        <img src="images/img7.jpg" alt="Mumbai Indians 2017 Trophy">
+
+        <img src="images/img7.jpg"
+             alt="Mumbai Indians 2017 Trophy">
+
         <span>03</span>
+
     </div>
 
     <div class="card-content">
+
         <p class="year">2017</p>
+
         <h3>Third Trophy</h3>
+
         <p>
-            Mumbai Indians defeated RPS in a thrilling final at
-            Rajiv Gandhi Stadium, Hyderabad.
+            Mumbai Indians won a thrilling final and claimed
+            their third IPL title.
         </p>
-        <a href="#">Explore <i class="fa-solid fa-arrow-right"></i></a>
+
+        <a href="about.html">
+            Explore
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
     </div>
+
 </div>
 
 
 <div class="trophy-card">
+
     <div class="card-image">
-        <img src="images/mp.jpg" alt="Mumbai Indians 2019 Trophy">
+
+        <img src="images/mp.jpg"
+             alt="Mumbai Indians 2019 Trophy">
+
         <span>04</span>
+
     </div>
 
     <div class="card-content">
+
         <p class="year">2019</p>
+
         <h3>Fourth Trophy</h3>
+
         <p>
-            Mumbai Indians defeated CSK at Rajiv Gandhi Stadium,
-            Hyderabad.
+            A dramatic final victory gave Mumbai Indians their
+            fourth IPL championship.
         </p>
-        <a href="#">Explore <i class="fa-solid fa-arrow-right"></i></a>
+
+        <a href="about.html">
+            Explore
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
     </div>
+
 </div>
 
 
 <div class="trophy-card">
+
     <div class="card-image">
-        <img src="images/bu.webp" alt="Mumbai Indians 2020 Trophy">
+
+        <img src="images/bu.webp"
+             alt="Mumbai Indians 2020 Trophy">
+
         <span>05</span>
+
     </div>
 
     <div class="card-content">
+
         <p class="year">2020</p>
+
         <h3>Fifth Trophy</h3>
+
         <p>
-            Mumbai Indians defeated Delhi Capitals in Dubai and
-            completed a historic fifth IPL title.
+            Mumbai Indians defeated Delhi Capitals and completed
+            a historic fifth IPL title.
         </p>
-        <a href="#">Explore <i class="fa-solid fa-arrow-right"></i></a>
+
+        <a href="about.html">
+            Explore
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
     </div>
+
 </div>
 ```
 
 </section>
+
+<!-- ================= EXPLORE MI ================= -->
+
+<section class="explore-section">
+
+```
+<div class="section-heading">
+
+    <p class="section-tag">EXPLORE MI</p>
+
+    <h2>
+        More Than <span>Cricket</span>
+    </h2>
+
+    <p>
+        Explore the world of Mumbai Indians.
+    </p>
+
+</div>
+
+
+<div class="explore-grid">
+
+    <a href="matches.html" class="explore-card">
+
+        <i class="fa-solid fa-calendar-days"></i>
+
+        <h3>Matches</h3>
+
+        <p>
+            Fixtures, venues, results and ticket information.
+        </p>
+
+        <span>
+            Explore
+            <i class="fa-solid fa-arrow-right"></i>
+        </span>
+
+    </a>
+
+
+    <a href="squad.html" class="explore-card">
+
+        <i class="fa-solid fa-users"></i>
+
+        <h3>Squad</h3>
+
+        <p>
+            Discover the players who represent the MI family.
+        </p>
+
+        <span>
+            Meet The Squad
+            <i class="fa-solid fa-arrow-right"></i>
+        </span>
+
+    </a>
+
+
+    <a href="store.html" class="explore-card">
+
+        <i class="fa-solid fa-shirt"></i>
+
+        <h3>MI Store</h3>
+
+        <p>
+            Explore Mumbai Indians kits and merchandise.
+        </p>
+
+        <span>
+            Shop Now
+            <i class="fa-solid fa-arrow-right"></i>
+        </span>
+
+    </a>
+
+
+    <a href="about.html" class="explore-card">
+
+        <i class="fa-solid fa-crown"></i>
+
+        <h3>Our Story</h3>
+
+        <p>
+            Learn about the legacy behind One Family.
+        </p>
+
+        <span>
+            Discover
+            <i class="fa-solid fa-arrow-right"></i>
+        </span>
+
+    </a>
+
+</div>
+```
+
+</section>
+
+<!-- ================= FAMILY BANNER ================= -->
 
 <section class="legacy-banner">
-    <div>
-        <p class="section-tag">MORE THAN CRICKET</p>
-        <h2>We Are <span>One Family</span></h2>
-        <p>
-            Passion in every match. Pride in every victory.
-            Mumbai Indians is more than a team.
-        </p>
-    </div>
+
+```
+<div>
+
+    <p class="section-tag">
+        MORE THAN CRICKET
+    </p>
+
+    <h2>
+        We Are <span>One Family</span>
+    </h2>
+
+    <p>
+        Passion in every match. Pride in every victory.
+        Mumbai Indians is more than a team.
+    </p>
+
+    <a href="about.html" class="primary-btn">
+        Discover Our Story
+        <i class="fa-solid fa-arrow-right"></i>
+    </a>
+
+</div>
+```
+
 </section>
 
 </main>
+
+<!-- ================= FOOTER ================= -->
 
 <footer id="contact">
 
@@ -188,33 +622,74 @@
 <div class="footer-content">
 
     <div class="footer-brand">
+
         <img src="images/logo.png" alt="Mumbai Indians">
+
         <h3>MUMBAI INDIANS</h3>
+
         <p>#OneFamily</p>
+
     </div>
+
 
     <div class="footer-links">
-        <h4>QUICK LINKS</h4>
+
+        <h4>EXPLORE</h4>
+
         <a href="index.html">Home</a>
+        <a href="matches.html">Matches</a>
         <a href="about.html">About</a>
+        <a href="store.html">Store</a>
         <a href="login.html">Login</a>
+
     </div>
 
+
+    <div class="footer-links">
+
+        <h4>LEGACY</h4>
+
+        <a href="#trophies">Trophies</a>
+        <a href="squad.html">Squad</a>
+        <a href="matches.html">Fixtures</a>
+
+    </div>
+
+
     <div class="footer-social">
+
         <h4>FOLLOW THE FAMILY</h4>
 
         <div>
-            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+
+            <a href="#" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+            <a href="#" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <a href="#" aria-label="X">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
+
+            <a href="#" aria-label="YouTube">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+
         </div>
+
     </div>
 
 </div>
 
+
 <div class="copyright">
-    © 2026 Mumbai Indians Fan Website • Designed by PRATIK
+
+    © 2026 Mumbai Indians Fan Website
+    • Designed by PRATIK
+
 </div>
 ```
 
