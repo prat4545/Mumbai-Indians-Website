@@ -1,108 +1,224 @@
-<! DOCTYPE html>
+<!DOCTYPE html>
+
 <html lang="en">
-  <head>
-    <title>Mumbai Indians</title>
-      <link rel="stylesheet" href="css_style.css">
-       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
- </head>
-  <body>
-      <header>
-		     <nav>
-                  <a href="index.html"><img src="images/logo.png"></a> 
-	               <h1>#OneFamily</h1>
-	              <div class="links">
-	                <ul>
-			          <li><a href="index.html">HOME</a></li>
-					  <li><a href="about.html">ABOUT</a></li>
-					  <li><a href="">TROPHY,S</a></li>
-					  <li><a href="">CONTACT</a></li>
-					  <li><button class="login"  onclick=" location.href ='login.html'"><a href=""></a>Login</button></li>
-					 
-					</ul>
-			
-	             </div>
-	         </nav>
-	  </header>
-	  <div class="container">
-		<div class="outer">
-			 <b>   
-	 </div>	
-	   </div>
-			<hr>
-			       					
-	<div class="con1">
-			<div class="image">
-			    <img id="pic" src="images/i3.webp">
-			<div class="text">
-			    <h1>1st Trophy 2013</h1>
-			    <p>vs CSK, at eden gardens kolkata under Rohit Sharma captaincy</p>
-			    <a href="" class="button">Read More</a>
-			</div>
-			</div>
-			
-			<div class="image">
-		       	<img id="pic" src="images/i5.webp">
-			<div  class="text">
-			    <h1>2nd Trophy 2015</h1>
-			    <p>vs CSK, at eden gardens, kolkata under Rohit Sharma captaincy</p>
-			    <a href="" class="button">Read More</a>
-			</div>
-			</div>
-			
-			<div class="image">
-			     <img id="pic" src="images/i7.jpg">
-			<div  class="text">
-			     <h1>3rd Trophy 2017</h1>
-			     <p>vs RPS, at rajiv gandhi stadium, hyderabad under Rohit Sharma captaincy</p>
-			     <a href="" class="button">Read More</a>
-			</div>
-            </div>
-	 </div><br>
-	 
-	      
-	<div class="con2">
-			<div class="image">
-			     <img id="pic" src="images/mp.jpg">
-			<div class="text">
-			     <h1>4th Trophy 2019</h1>
-			     <p>vs CSK, at rajiv gandhi stadium, hyderabad under Rohit Sharma captaincy</p>
-			     <a href="" class="button">Read More</a>
-			</div>
-		    </div>
-			<div class="image">
-			      <img id="pic" src="images/bu.webp">
-			<div  class="text">
-			      <h1>5th Trophy 2020</h1>
-			      <p>vs DC, at dubai international stedium, dubai under Rohit Sharma captaincy</p>
-			      <a href="" class="button">Read More</a>
-			</div>
-			</div>
-	 </div>
-	 
-	<footer>
-	<center>
-	      <div class="footerContainer">
-		  <div class"socialIcons">
-			         <a href=""><i class="fa-brands fa-facebook"></i></a>
-					  <a href=""><i class="fa-brands fa-instagram"></i></a>
-					   <a href=""><i class="fa-brands fa-twitter"></i></a>
-					    <a href=""><i class="fa-brands fa-youtube"></i></a>
-			   </div>
-			  
-			    <div class="footerNav">
-			    <ul> 
-			            <li><a href="">About</a></li> 
-					    <li><a href="">Contact Us</a></li>
-			    </ul> 
-		 </div>
-		 </div> 
-		   </center>
-	    </footer>
-		<center>
-				<div class="bottom-bar">
-				     <p>Copyright@2024: Designed by PRATIK</p>
-				</div>	 
-        </center>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mumbai Indians fan website - One Family">
+    <title>Mumbai Indians | One Family</title>
+
+```
+<link rel="stylesheet" href="css_style.css">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+```
+
+</head>
+
+<body>
+
+<header class="navbar">
+    <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="Mumbai Indians Logo">
+    </a>
+
+```
+<div class="brand">
+    <span>MUMBAI INDIANS</span>
+    <small>#OneFamily</small>
+</div>
+
+<nav>
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About</a>
+    <a href="#trophies">Trophies</a>
+    <a href="#contact">Contact</a>
+    <a href="login.html" class="login-btn">Login</a>
+</nav>
+```
+
+</header>
+
+<main>
+
+<section class="hero">
+    <div class="hero-overlay"></div>
+
+```
+<div class="hero-content">
+    <p class="eyebrow">ONE FAMILY • ONE LEGACY</p>
+
+    <h1>MUMBAI<br><span>INDIANS</span></h1>
+
+    <p class="hero-text">
+        Celebrating the passion, victories and unforgettable moments
+        of Mumbai Indians.
+    </p>
+
+    <div class="hero-buttons">
+        <a href="#trophies" class="primary-btn">Explore Legacy</a>
+        <a href="about.html" class="secondary-btn">About Team</a>
+    </div>
+</div>
+```
+
+</section>
+
+<section class="intro">
+    <p class="section-tag">THE LEGACY</p>
+    <h2>A Journey Built on <span>Victory</span></h2>
+    <p>
+        From the first championship to five unforgettable IPL titles,
+        every trophy represents teamwork, determination and the spirit
+        of the Mumbai Indians family.
+    </p>
+</section>
+
+<section class="trophies" id="trophies">
+
+```
+<div class="trophy-card">
+    <div class="card-image">
+        <img src="images/i3.webp" alt="Mumbai Indians 2013 Trophy">
+        <span>01</span>
+    </div>
+
+    <div class="card-content">
+        <p class="year">2013</p>
+        <h3>First Trophy</h3>
+        <p>
+            Mumbai Indians defeated CSK at Eden Gardens, Kolkata,
+            under the captaincy of Rohit Sharma.
+        </p>
+        <a href="#">Explore <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
+
+
+<div class="trophy-card">
+    <div class="card-image">
+        <img src="images/i5.webp" alt="Mumbai Indians 2015 Trophy">
+        <span>02</span>
+    </div>
+
+    <div class="card-content">
+        <p class="year">2015</p>
+        <h3>Second Trophy</h3>
+        <p>
+            Another memorable victory against CSK at Eden Gardens,
+            Kolkata, under Rohit Sharma.
+        </p>
+        <a href="#">Explore <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
+
+
+<div class="trophy-card">
+    <div class="card-image">
+        <img src="images/i7.jpg" alt="Mumbai Indians 2017 Trophy">
+        <span>03</span>
+    </div>
+
+    <div class="card-content">
+        <p class="year">2017</p>
+        <h3>Third Trophy</h3>
+        <p>
+            Mumbai Indians defeated RPS in a thrilling final at
+            Rajiv Gandhi Stadium, Hyderabad.
+        </p>
+        <a href="#">Explore <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
+
+
+<div class="trophy-card">
+    <div class="card-image">
+        <img src="images/mp.jpg" alt="Mumbai Indians 2019 Trophy">
+        <span>04</span>
+    </div>
+
+    <div class="card-content">
+        <p class="year">2019</p>
+        <h3>Fourth Trophy</h3>
+        <p>
+            Mumbai Indians defeated CSK at Rajiv Gandhi Stadium,
+            Hyderabad.
+        </p>
+        <a href="#">Explore <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
+
+
+<div class="trophy-card">
+    <div class="card-image">
+        <img src="images/bu.webp" alt="Mumbai Indians 2020 Trophy">
+        <span>05</span>
+    </div>
+
+    <div class="card-content">
+        <p class="year">2020</p>
+        <h3>Fifth Trophy</h3>
+        <p>
+            Mumbai Indians defeated Delhi Capitals in Dubai and
+            completed a historic fifth IPL title.
+        </p>
+        <a href="#">Explore <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
+```
+
+</section>
+
+<section class="legacy-banner">
+    <div>
+        <p class="section-tag">MORE THAN CRICKET</p>
+        <h2>We Are <span>One Family</span></h2>
+        <p>
+            Passion in every match. Pride in every victory.
+            Mumbai Indians is more than a team.
+        </p>
+    </div>
+</section>
+
+</main>
+
+<footer id="contact">
+
+```
+<div class="footer-content">
+
+    <div class="footer-brand">
+        <img src="images/logo.png" alt="Mumbai Indians">
+        <h3>MUMBAI INDIANS</h3>
+        <p>#OneFamily</p>
+    </div>
+
+    <div class="footer-links">
+        <h4>QUICK LINKS</h4>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="login.html">Login</a>
+    </div>
+
+    <div class="footer-social">
+        <h4>FOLLOW THE FAMILY</h4>
+
+        <div>
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+    </div>
+
+</div>
+
+<div class="copyright">
+    © 2026 Mumbai Indians Fan Website • Designed by PRATIK
+</div>
+```
+
+</footer>
+
 </body>
 </html>
