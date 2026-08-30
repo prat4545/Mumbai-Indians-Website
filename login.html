@@ -1,18 +1,176 @@
-<html>
-  <head>
-    <title></title>
-	<link rel="stylesheet" href="login.css">
-	</head>
-	<body>
-	
-	<div class="contain">
-	   <div class="text">
-	      <h1>Login</h1>
-		  <input class=inp1 type="text" placeholder="Enter UserName">
-		  <input class=inp2 type="password" placeholder="Enter Password">
-		  <p>Forgot<span> Password ?</span></p>
-		  <button>Login</button>
-		  <p> Not a member ?  <span>Sign Up</span></p>
-	   </div>
-	</div>
-	</body>
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<meta name="description" content="Mumbai Indians fan website login">
+
+<title>Login | Mumbai Indians</title>
+
+<link rel="stylesheet" href="css_login.css">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+```
+
+</head>
+
+<body>
+
+<div class="login-page">
+
+```
+<div class="login-decoration decoration-one"></div>
+<div class="login-decoration decoration-two"></div>
+
+
+<div class="login-container">
+
+    <div class="login-brand">
+
+        <a href="index.html" class="back-home">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Home
+        </a>
+
+        <div class="login-logo">
+            <img src="images/logo.png" alt="Mumbai Indians Logo">
+        </div>
+
+        <p class="brand-tag">#ONEFAMILY</p>
+
+        <h1>Welcome Back</h1>
+
+        <p>
+            Login to continue your Mumbai Indians experience.
+        </p>
+
+    </div>
+
+
+    <form class="login-form">
+
+        <div class="input-group">
+
+            <label for="email">Email Address</label>
+
+            <div class="input-box">
+
+                <i class="fa-regular fa-envelope"></i>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label for="password">Password</label>
+
+            <div class="input-box">
+
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+                <button type="button"
+                        class="password-toggle"
+                        onclick="togglePassword()"
+                        aria-label="Show password">
+
+                    <i class="fa-regular fa-eye"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-options">
+
+            <label class="remember">
+
+                <input type="checkbox">
+
+                <span>Remember me</span>
+
+            </label>
+
+            <a href="#">Forgot password?</a>
+
+        </div>
+
+
+        <button type="submit" class="login-submit">
+
+            Login
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </button>
+
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+
+        <p class="signup-text">
+            Don't have an account?
+            <a href="#">Create Account</a>
+        </p>
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<script>
+
+function togglePassword() {
+
+    const password = document.getElementById("password");
+    const icon = document.querySelector(".password-toggle i");
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+
+    } else {
+
+        password.type = "password";
+
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
