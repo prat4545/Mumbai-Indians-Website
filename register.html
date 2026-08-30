@@ -300,19 +300,14 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         return;
     }
 
-    const { error: profileError } = await supabaseClient
-        .from("profiles")
-        .insert({
-            id: data.user.id,
-            full_name: name,
-            email: email,
-            mobile: mobile
-        });
+  if (!data.user) {
+    alert("Registration could not be completed.");
+    return;
+}
 
-    if (profileError) {
-        alert("Account created, but profile could not be saved: " + profileError.message);
-        return;
-    }
+alert("Account created successfully!");
+
+window.location.href = "login.html";
 
     alert("Account created successfully!");
 
