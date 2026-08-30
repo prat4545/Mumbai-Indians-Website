@@ -170,7 +170,44 @@ function togglePassword() {
 
 }
 
-</script>
 
+const SUPABASE_URL = "https://ukksxlhopvemunyibusg.supabase.co";
+const SUPABASE_KEY = "sb_publishable_0hFYgocoBicqr-nAMRuXYw_Zrecb0Qo";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+document.querySelector(".login-form").addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+    });
+
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    if (!data.user) {
+        alert("Login failed. Please try again.");
+        return;
+    }
+
+    alert("Login successful!");
+
+    window.location.href = "index.html";
+
+});
+
+</script>
 </body>
 </html>
