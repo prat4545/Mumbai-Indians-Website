@@ -226,6 +226,14 @@
 </div>
 
 <script>
+const SUPABASE_URL = "https://ukksxlhopvemunyibusg.supabase.co";
+const SUPABASE_KEY = "sb_publishable_0hFYgocoBicqr-nAMRuXYw_Zrecb0Qo";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
 
 function togglePassword(id, button) {
 
@@ -247,32 +255,70 @@ function togglePassword(id, button) {
         icon.classList.add("fa-eye");
 
     }
-
 }
 
 
-document.getElementById("registerForm").addEventListener("submit", function(event) {
+document.getElementById("registerForm").addEventListener("submit", async function(event) {
 
     event.preventDefault();
 
-    const password =
-        document.getElementById("password").value;
-
-    const confirmPassword =
-        document.getElementById("confirmPassword").value;
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const mobile = document.getElementById("mobile").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+    const terms = document.getElementById("terms").checked;
 
     if (password !== confirmPassword) {
-
         alert("Passwords do not match.");
-
         return;
-
     }
 
-    alert("Registration form submitted successfully.");
+    if (!terms) {
+        alert("Please accept the Terms & Conditions.");
+        return;
+    }
+
+    const { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+            data: {
+                full_name: name,
+                mobile: mobile
+            }
+        }
+    });
+
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    if (!data.user) {
+        alert("Registration could not be completed.");
+        return;
+    }
+
+    const { error: profileError } = await supabaseClient
+        .from("profiles")
+        .insert({
+            id: data.user.id,
+            full_name: name,
+            email: email,
+            mobile: mobile
+        });
+
+    if (profileError) {
+        alert("Account created, but profile could not be saved: " + profileError.message);
+        return;
+    }
+
+    alert("Account created successfully!");
+
+    window.location.href = "login.html";
 
 });
-
 </script>
 
 </body>
