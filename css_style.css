@@ -1948,3 +1948,35 @@ font-size: 13px;
 ```
 
 }
+
+/* ================= REGISTER PAGE ================= */
+
+.register-terms {
+margin: 5px 0 20px;
+align-items: flex-start;
+line-height: 1.5;
+}
+
+.register-terms input {
+margin-top: 3px;
+}
+
+.register-terms span {
+color: #9eabc0;
+}
+
+.register-terms span:hover {
+color: #ffffff;
+}
+
+/* ================= REGISTER RESPONSIVE ================= */
+
+@media (max-width: 650px) {
+
+```
+.register-terms {
+    font-size: 11px;
+}
+```
+
+}
