@@ -2356,3 +2356,301 @@ margin-top: 25px;
 ```
 
 }
+
+/* ================= SQUAD PAGE ================= */
+
+.squad-hero {
+min-height: 58vh;
+position: relative;
+display: flex;
+align-items: center;
+overflow: hidden;
+background:
+radial-gradient(circle at 80% 30%, rgba(0, 119, 255, 0.30), transparent 30%),
+linear-gradient(120deg, #020712 0%, #06152f 55%, #001d4d 100%);
+}
+
+.squad-hero::before {
+content: "";
+position: absolute;
+width: 520px;
+height: 520px;
+right: -150px;
+top: -80px;
+border-radius: 50%;
+border: 1px solid rgba(70, 160, 255, 0.18);
+box-shadow:
+0 0 0 70px rgba(70, 160, 255, 0.03),
+0 0 0 140px rgba(70, 160, 255, 0.02);
+}
+
+.squad-hero-overlay {
+position: absolute;
+inset: 0;
+background: linear-gradient(
+90deg,
+rgba(2, 7, 18, 0.96) 0%,
+rgba(2, 7, 18, 0.72) 50%,
+rgba(2, 7, 18, 0.20) 100%
+);
+}
+
+.squad-hero-content {
+position: relative;
+z-index: 2;
+max-width: 800px;
+padding: 140px 8% 90px;
+}
+
+.squad-hero h1 {
+font-size: clamp(58px, 9vw, 110px);
+font-weight: 900;
+line-height: 0.9;
+letter-spacing: -4px;
+margin-bottom: 25px;
+}
+
+.squad-hero h1 span {
+color: transparent;
+-webkit-text-stroke: 2px #ffffff;
+}
+
+.squad-hero-content > p:last-child {
+max-width: 560px;
+color: #aebbd0;
+font-size: 15px;
+}
+
+/* ================= CAPTAIN ================= */
+
+.captain-section {
+max-width: 1200px;
+margin: auto;
+padding: 110px 25px;
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 70px;
+align-items: center;
+}
+
+.captain-image {
+height: 520px;
+overflow: hidden;
+border-radius: 25px;
+background:
+radial-gradient(circle at center, rgba(0, 119, 255, 0.25), transparent 60%),
+#07162d;
+border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.captain-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.captain-content h2 {
+font-size: clamp(38px, 5vw, 60px);
+line-height: 1.05;
+margin-bottom: 25px;
+}
+
+.captain-content h2 span {
+color: #198cff;
+}
+
+.captain-content h3 {
+font-size: 25px;
+letter-spacing: 2px;
+margin-bottom: 18px;
+}
+
+.captain-content > p:not(.section-tag) {
+color: #9eabc0;
+max-width: 520px;
+font-size: 14px;
+line-height: 1.8;
+}
+
+.captain-stats {
+display: flex;
+gap: 35px;
+margin-top: 35px;
+flex-wrap: wrap;
+}
+
+.captain-stats div {
+min-width: 100px;
+padding: 18px;
+border-radius: 14px;
+background: #09172d;
+border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.captain-stats strong {
+display: block;
+font-size: 24px;
+color: #2994ff;
+}
+
+.captain-stats span {
+display: block;
+margin-top: 3px;
+font-size: 10px;
+color: #91a0b7;
+text-transform: uppercase;
+}
+
+/* ================= SQUAD SECTIONS ================= */
+
+.squad-section {
+max-width: 1200px;
+margin: auto;
+padding: 20px 25px 100px;
+}
+
+.squad-heading {
+margin-bottom: 35px;
+}
+
+.squad-heading h2 {
+font-size: clamp(32px, 4vw, 48px);
+letter-spacing: -1px;
+}
+
+.players-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 25px;
+}
+
+.player-card {
+overflow: hidden;
+border-radius: 20px;
+background: linear-gradient(145deg, #0c1930, #071020);
+border: 1px solid rgba(255, 255, 255, 0.08);
+transition: 0.35s ease;
+}
+
+.player-card:hover {
+transform: translateY(-8px);
+border-color: rgba(38, 143, 255, 0.5);
+box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+}
+
+.player-image {
+height: 360px;
+position: relative;
+overflow: hidden;
+background:
+radial-gradient(circle at 50% 40%, rgba(0, 119, 255, 0.28), transparent 55%),
+#07162d;
+}
+
+.player-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: 0.5s ease;
+}
+
+.player-card:hover .player-image img {
+transform: scale(1.05);
+}
+
+.jersey-number {
+position: absolute;
+right: 18px;
+top: 15px;
+font-size: 52px;
+font-weight: 900;
+color: rgba(255, 255, 255, 0.14);
+line-height: 1;
+}
+
+.player-info {
+padding: 22px;
+}
+
+.player-info h3 {
+font-size: 18px;
+letter-spacing: 0.5px;
+margin-bottom: 5px;
+}
+
+.player-info p {
+font-size: 10px;
+letter-spacing: 1.5px;
+color: #2994ff;
+font-weight: 700;
+}
+
+/* ================= SQUAD RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+
+```
+.captain-section {
+    grid-template-columns: 1fr;
+    gap: 45px;
+}
+
+.captain-image {
+    height: 500px;
+}
+
+.players-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+```
+
+}
+
+@media (max-width: 650px) {
+
+```
+.squad-hero-content {
+    padding: 150px 7% 80px;
+}
+
+.squad-hero h1 {
+    font-size: 60px;
+    letter-spacing: -3px;
+}
+
+.squad-hero h1 span {
+    -webkit-text-stroke: 1px #ffffff;
+}
+
+.captain-section {
+    padding: 75px 18px;
+}
+
+.captain-image {
+    height: 420px;
+}
+
+.squad-section {
+    padding: 20px 18px 70px;
+}
+
+.players-grid {
+    grid-template-columns: 1fr;
+}
+
+.player-image {
+    height: 400px;
+}
+
+.captain-stats {
+    gap: 12px;
+}
+
+.captain-stats div {
+    flex: 1;
+    min-width: 85px;
+    padding: 14px 10px;
+}
+```
+
+}
