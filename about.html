@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="About Mumbai Indians fan website">
-    <title>About | Mumbai Indians</title>
 
 ```
+<meta name="description"
+      content="About Mumbai Indians fan website">
+
+<title>About | Mumbai Indians</title>
+
 <link rel="stylesheet" href="css/about.css">
+
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 ```
 
 </head>
@@ -25,15 +32,34 @@
 </a>
 
 <div class="brand">
+
     <span>MUMBAI INDIANS</span>
+
     <small>#OneFamily</small>
+
 </div>
 
-<nav>
-    <a href="index.html">Home</a>
-    <a href="about.html" class="active">About</a>
-    <a href="index.html#trophies">Trophies</a>
-    <a href="login.html" class="login-btn">Login</a>
+
+<nav id="mainNav">
+
+    <a href="index.html">
+        Home
+    </a>
+
+    <a href="about.html" class="active">
+        About
+    </a>
+
+    <a href="index.html#trophies">
+        Trophies
+    </a>
+
+    <a href="login.html"
+       class="login-btn"
+       id="authNavButton">
+        Login
+    </a>
+
 </nav>
 ```
 
@@ -41,128 +67,146 @@
 
 <main>
 
+```
 <section class="about-hero">
 
-```
-<div class="about-hero-content">
+    <div class="about-hero-content">
 
-    <p class="section-tag">THE STORY</p>
+        <p class="section-tag">
+            THE STORY
+        </p>
 
-    <h1>
-        MORE THAN<br>
-        <span>A CRICKET TEAM.</span>
-    </h1>
+        <h1>
+            MORE THAN<br>
+            <span>A CRICKET TEAM.</span>
+        </h1>
 
-    <p>
-        Mumbai Indians represents passion, teamwork and the
-        never-give-up spirit that connects millions of fans
-        around the world.
-    </p>
+        <p>
+            Mumbai Indians represents passion, teamwork and the
+            never-give-up spirit that connects millions of fans
+            around the world.
+        </p>
 
-</div>
-```
+    </div>
 
 </section>
+
 
 <section class="about-section">
 
-```
-<div class="about-grid">
+    <div class="about-grid">
 
-    <div>
-        <p class="section-tag">ABOUT THE FAMILY</p>
+        <div>
 
-        <h2>
-            One Team.<br>
-            <span>One Family.</span>
-        </h2>
+            <p class="section-tag">
+                ABOUT THE FAMILY
+            </p>
+
+            <h2>
+                One Team.<br>
+                <span>One Family.</span>
+            </h2>
+
+        </div>
+
+
+        <div class="about-text">
+
+            <p>
+                Mumbai Indians is one of the most successful
+                franchises in the Indian Premier League. The team
+                has built a powerful identity through consistency,
+                teamwork and memorable performances.
+            </p>
+
+            <p>
+                This fan website celebrates the team's journey,
+                championship victories and the moments that have
+                made Mumbai Indians special to cricket fans.
+            </p>
+
+        </div>
+
     </div>
-
-    <div class="about-text">
-
-        <p>
-            Mumbai Indians is one of the most successful franchises
-            in the Indian Premier League. The team has built a
-            powerful identity through consistency, teamwork and
-            memorable performances.
-        </p>
-
-        <p>
-            This fan website celebrates the team's journey,
-            championship victories and the moments that have made
-            Mumbai Indians special to cricket fans.
-        </p>
-
-    </div>
-
-</div>
-```
 
 </section>
+
 
 <section class="values-section">
 
-```
-<div class="value-card">
-    <div class="value-icon">
-        <i class="fa-solid fa-trophy"></i>
+    <div class="value-card">
+
+        <div class="value-icon">
+            <i class="fa-solid fa-trophy"></i>
+        </div>
+
+        <h3>
+            Champions
+        </h3>
+
+        <p>
+            A legacy built through determination,
+            teamwork and unforgettable victories.
+        </p>
+
     </div>
 
-    <h3>Champions</h3>
 
-    <p>
-        A legacy built through determination,
-        teamwork and unforgettable victories.
-    </p>
-</div>
+    <div class="value-card">
 
+        <div class="value-icon">
+            <i class="fa-solid fa-people-group"></i>
+        </div>
 
-<div class="value-card">
-    <div class="value-icon">
-        <i class="fa-solid fa-people-group"></i>
+        <h3>
+            One Family
+        </h3>
+
+        <p>
+            Players and supporters connected by
+            one passion and one identity.
+        </p>
+
     </div>
 
-    <h3>One Family</h3>
 
-    <p>
-        Players and supporters connected by
-        one passion and one identity.
-    </p>
-</div>
+    <div class="value-card">
 
+        <div class="value-icon">
+            <i class="fa-solid fa-bolt"></i>
+        </div>
 
-<div class="value-card">
-    <div class="value-icon">
-        <i class="fa-solid fa-bolt"></i>
+        <h3>
+            Never Give Up
+        </h3>
+
+        <p>
+            The spirit to fight until the final ball
+            is part of the Mumbai Indians identity.
+        </p>
+
     </div>
-
-    <h3>Never Give Up</h3>
-
-    <p>
-        The spirit to fight until the final ball
-        is part of the Mumbai Indians identity.
-    </p>
-</div>
-```
 
 </section>
+
 
 <section class="about-cta">
 
-```
-<p class="section-tag">THE LEGACY</p>
+    <p class="section-tag">
+        THE LEGACY
+    </p>
 
-<h2>
-    Explore the <span>Championship Journey.</span>
-</h2>
+    <h2>
+        Explore the <span>Championship Journey.</span>
+    </h2>
 
-<a href="index.html#trophies" class="primary-btn">
-    View Trophies
-    <i class="fa-solid fa-arrow-right"></i>
-</a>
-```
+    <a href="index.html#trophies" class="primary-btn">
+        View Trophies
+        <i class="fa-solid fa-arrow-right"></i>
+    </a>
 
 </section>
+```
 
 </main>
 
@@ -171,48 +215,81 @@
 ```
 <div class="footer-content">
 
+
     <div class="footer-brand">
 
-        <img src="images/logo.png" alt="Mumbai Indians">
+        <img src="images/logo.png"
+             alt="Mumbai Indians">
 
-        <h3>MUMBAI INDIANS</h3>
+        <h3>
+            MUMBAI INDIANS
+        </h3>
 
-        <p>#OneFamily</p>
+        <p>
+            #OneFamily
+        </p>
 
     </div>
 
 
     <div class="footer-links">
 
-        <h4>QUICK LINKS</h4>
+        <h4>
+            QUICK LINKS
+        </h4>
 
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="index.html#trophies">Trophies</a>
-        <a href="login.html">Login</a>
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="index.html#trophies">
+            Trophies
+        </a>
+
+        <a href="matches.html">
+            Matches
+        </a>
+
+        <a href="squad.html">
+            Squad
+        </a>
+
+        <a href="store.html">
+            Store
+        </a>
 
     </div>
 
 
     <div class="footer-social">
 
-        <h4>FOLLOW THE FAMILY</h4>
+        <h4>
+            FOLLOW THE FAMILY
+        </h4>
 
         <div>
 
-            <a href="#">
+            <a href="#"
+               aria-label="Facebook">
                 <i class="fa-brands fa-facebook-f"></i>
             </a>
 
-            <a href="#">
+            <a href="#"
+               aria-label="Instagram">
                 <i class="fa-brands fa-instagram"></i>
             </a>
 
-            <a href="#">
+            <a href="#"
+               aria-label="X">
                 <i class="fa-brands fa-x-twitter"></i>
             </a>
 
-            <a href="#">
+            <a href="#"
+               aria-label="YouTube">
                 <i class="fa-brands fa-youtube"></i>
             </a>
 
@@ -224,13 +301,85 @@
 
 
 <div class="copyright">
-    © 2026 Mumbai Indians Fan Website • Designed by PRATIK
+
+    © 2026 Mumbai Indians Fan Website
+    • Designed by PRATIK
+
 </div>
 ```
 
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script src="js/auth.js"></script>
+<script>
+
+const SUPABASE_URL =
+    "https://ukksxlhopvemunyibusg.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_0hFYgocoBicqr-nAMRuXYw_Zrecb0Qo";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+const authNavButton =
+    document.getElementById("authNavButton");
+
+
+async function updateNavbar() {
+
+    if (!authNavButton) return;
+
+    try {
+
+        const {
+            data: {
+                session
+            }
+        } = await supabaseClient.auth.getSession();
+
+
+        if (session) {
+
+            authNavButton.href = "account.html";
+
+            authNavButton.innerHTML =
+                '<i class="fa-regular fa-user"></i> Account';
+
+        } else {
+
+            authNavButton.href = "login.html";
+
+            authNavButton.textContent = "Login";
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Authentication check failed:",
+            error
+        );
+
+        authNavButton.href = "login.html";
+        authNavButton.textContent = "Login";
+    }
+}
+
+
+updateNavbar();
+
+
+supabaseClient.auth.onAuthStateChange(
+    function () {
+        updateNavbar();
+    }
+);
+
+</script>
+
 </body>
 </html>
