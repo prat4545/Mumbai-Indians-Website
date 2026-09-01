@@ -103,7 +103,7 @@
 
     </div>
 
-    <a href="#" class="edit-profile">
+   <a href="#" class="edit-profile" id="editProfileBtn">
         <i class="fa-solid fa-pen"></i>
         Edit Profile
     </a>
@@ -259,7 +259,8 @@
                 and account preferences.
             </p>
 
-            <a href="#" class="account-action">
+           <a href="#" class="account-action" id="manageProfileBtn">
+    Manage Profile
                 Manage Profile
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
@@ -352,7 +353,100 @@
 ```
 
 </section>
+<!-- ================= EDIT PROFILE MODAL ================= -->
 
+<div class="profile-modal" id="profileModal">
+
+    <div class="profile-modal-content">
+
+        <button class="close-modal" id="closeProfileModal">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <p class="section-tag">ACCOUNT SETTINGS</p>
+
+        <h2>
+            Edit <span>Profile</span>
+        </h2>
+
+        <form id="profileForm">
+
+            <div class="input-group">
+
+                <label for="profileName">
+                    Full Name
+                </label>
+
+                <div class="input-box">
+
+                    <i class="fa-regular fa-user"></i>
+
+                    <input
+                        type="text"
+                        id="profileName"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="profileEmail">
+                    Email Address
+                </label>
+
+                <div class="input-box">
+
+                    <i class="fa-regular fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        id="profileEmail"
+                        disabled
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="profileMobile">
+                    Mobile Number
+                </label>
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    <input
+                        type="tel"
+                        id="profileMobile"
+                        maxlength="10"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button type="submit" class="login-submit">
+
+                Save Changes
+
+                <i class="fa-solid fa-check"></i>
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
 </main>
 
 <footer>
