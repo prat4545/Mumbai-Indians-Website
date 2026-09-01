@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,7 @@
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 ```
 
 </head>
@@ -67,6 +68,8 @@
                     id="name"
                     name="name"
                     placeholder="Enter your full name"
+                    autocomplete="name"
+                    minlength="2"
                     required
                 >
 
@@ -88,6 +91,7 @@
                     id="email"
                     name="email"
                     placeholder="Enter your email"
+                    autocomplete="email"
                     required
                 >
 
@@ -111,6 +115,9 @@
                     placeholder="Enter your mobile number"
                     pattern="[0-9]{10}"
                     maxlength="10"
+                    minlength="10"
+                    inputmode="numeric"
+                    autocomplete="tel"
                     required
                 >
 
@@ -133,6 +140,7 @@
                     name="password"
                     placeholder="Create a password"
                     minlength="6"
+                    autocomplete="new-password"
                     required
                 >
 
@@ -165,6 +173,7 @@
                     name="confirmPassword"
                     placeholder="Confirm your password"
                     minlength="6"
+                    autocomplete="new-password"
                     required
                 >
 
@@ -194,11 +203,22 @@
         </label>
 
 
-        <button type="submit" class="login-submit">
+        <div id="registerMessage"
+             role="alert"
+             aria-live="polite"
+             style="display:none;">
+        </div>
 
-            Create Account
 
-            <i class="fa-solid fa-arrow-right"></i>
+        <button type="submit"
+                class="login-submit"
+                id="registerButton">
+
+            <span id="registerButtonText">
+                Create Account
+            </span>
+
+            <i class="fa-solid fa-arrow-right" id="registerButtonIcon"></i>
 
         </button>
 
@@ -226,8 +246,11 @@
 </div>
 
 <script>
+
 const SUPABASE_URL = "https://ukksxlhopvemunyibusg.supabase.co";
-const SUPABASE_KEY = "sb_publishable_0hFYgocoBicqr-nAMRuXYw_Zrecb0Qo";
+
+const SUPABASE_KEY =
+    "sb_publishable_0hFYgocoBicqr-nAMRuXYw_Zrecb0Qo";
 
 const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
@@ -235,85 +258,261 @@ const supabaseClient = window.supabase.createClient(
 );
 
 
+const registerForm = document.getElementById("registerForm");
+const registerButton = document.getElementById("registerButton");
+const registerButtonText = document.getElementById("registerButtonText");
+const registerButtonIcon = document.getElementById("registerButtonIcon");
+const registerMessage = document.getElementById("registerMessage");
+
+
 function togglePassword(id, button) {
 
-    const password = document.getElementById(id);
+    const passwordInput = document.getElementById(id);
     const icon = button.querySelector("i");
 
-    if (password.type === "password") {
+    if (passwordInput.type === "password") {
 
-        password.type = "text";
+        passwordInput.type = "text";
 
         icon.classList.remove("fa-eye");
         icon.classList.add("fa-eye-slash");
 
+        button.setAttribute("aria-label", "Hide password");
+
     } else {
 
-        password.type = "password";
+        passwordInput.type = "password";
 
         icon.classList.remove("fa-eye-slash");
         icon.classList.add("fa-eye");
 
+        button.setAttribute("aria-label", "Show password");
     }
 }
 
 
-document.getElementById("registerForm").addEventListener("submit", async function(event) {
+function showMessage(message, type = "error") {
+
+    registerMessage.textContent = message;
+
+    registerMessage.style.display = "block";
+
+    registerMessage.style.padding = "12px 14px";
+    registerMessage.style.marginBottom = "16px";
+    registerMessage.style.borderRadius = "8px";
+    registerMessage.style.fontSize = "14px";
+
+    if (type === "success") {
+
+        registerMessage.style.background = "#e8f7ee";
+        registerMessage.style.color = "#18733a";
+
+    } else {
+
+        registerMessage.style.background = "#fff0f0";
+        registerMessage.style.color = "#c62828";
+    }
+}
+
+
+function hideMessage() {
+
+    registerMessage.style.display = "none";
+    registerMessage.textContent = "";
+}
+
+
+function setLoading(isLoading) {
+
+    registerButton.disabled = isLoading;
+
+    if (isLoading) {
+
+        registerButtonText.textContent = "Creating Account...";
+        registerButtonIcon.className = "fa-solid fa-spinner fa-spin";
+
+    } else {
+
+        registerButtonText.textContent = "Create Account";
+        registerButtonIcon.className = "fa-solid fa-arrow-right";
+    }
+}
+
+
+registerForm.addEventListener("submit", async function(event) {
 
     event.preventDefault();
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const mobile = document.getElementById("mobile").value.trim();
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
-    const terms = document.getElementById("terms").checked;
+    hideMessage();
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const email =
+        document.getElementById("email").value.trim().toLowerCase();
+
+    const mobile =
+        document.getElementById("mobile").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+    const terms =
+        document.getElementById("terms").checked;
+
+
+    if (name.length < 2) {
+
+        showMessage("Please enter your full name.");
+        return;
+    }
+
+
+    if (!/^[0-9]{10}$/.test(mobile)) {
+
+        showMessage("Please enter a valid 10-digit mobile number.");
+        return;
+    }
+
+
+    if (password.length < 6) {
+
+        showMessage("Password must be at least 6 characters long.");
+        return;
+    }
+
 
     if (password !== confirmPassword) {
-        alert("Passwords do not match.");
+
+        showMessage("Passwords do not match.");
         return;
     }
+
 
     if (!terms) {
-        alert("Please accept the Terms & Conditions.");
+
+        showMessage("Please accept the Terms & Conditions.");
         return;
     }
 
-    const { data, error } = await supabaseClient.auth.signUp({
-        email: email,
-        password: password,
-        options: {
-            data: {
-                full_name: name,
-                mobile: mobile
-            }
+
+    setLoading(true);
+
+
+    try {
+
+        const { data, error } =
+            await supabaseClient.auth.signUp({
+
+                email: email,
+
+                password: password,
+
+                options: {
+
+                    data: {
+                        full_name: name,
+                        mobile: mobile
+                    }
+
+                }
+
+            });
+
+
+        if (error) {
+            throw error;
         }
-    });
 
-    if (error) {
-        alert(error.message);
-        return;
+
+        if (!data || !data.user) {
+
+            throw new Error(
+                "Registration could not be completed. Please try again."
+            );
+        }
+
+
+        /*
+         * Supabase profile information is passed through
+         * user metadata above.
+         *
+         * This works with the existing profile setup and
+         * avoids creating duplicate profile rows.
+         */
+
+
+        if (!data.session) {
+
+            showMessage(
+                "Account created successfully! Please check your email to verify your account, then login.",
+                "success"
+            );
+
+            registerForm.reset();
+
+            setLoading(false);
+
+            setTimeout(function() {
+
+                window.location.href = "login.html";
+
+            }, 2500);
+
+            return;
+        }
+
+
+        showMessage(
+            "Account created successfully! Redirecting to login...",
+            "success"
+        );
+
+
+        setTimeout(function() {
+
+            window.location.href = "login.html";
+
+        }, 1500);
+
+
+    } catch (error) {
+
+        console.error("Registration Error:", error);
+
+        let message =
+            error.message || "Registration failed. Please try again.";
+
+
+        if (
+            message.toLowerCase().includes("already registered") ||
+            message.toLowerCase().includes("user already registered")
+        ) {
+
+            message =
+                "An account with this email already exists. Please login instead.";
+        }
+
+
+        if (
+            message.toLowerCase().includes("password should be")
+        ) {
+
+            message =
+                "Password must be at least 6 characters long.";
+        }
+
+
+        showMessage(message);
+
+        setLoading(false);
     }
-
-    if (!data.user) {
-        alert("Registration could not be completed.");
-        return;
-    }
-
-  if (!data.user) {
-    alert("Registration could not be completed.");
-    return;
-}
-
-alert("Account created successfully!");
-
-window.location.href = "login.html";
-
-    alert("Account created successfully!");
-
-    window.location.href = "login.html";
 
 });
+
 </script>
 
 </body>
