@@ -38,7 +38,7 @@
     <a href="about.html">About</a>
     <a href="store.html">Store</a>
     <a href="account.html" class="active">My Account</a>
-    <a href="login.html" class="login-btn">Logout</a>
+    <a href="#" class="login-btn" id="logoutBtn">Logout</a>
 </nav>
 ```
 
@@ -569,6 +569,20 @@ async function loadUserProfile() {
 
 
 loadUserProfile();
+    document.getElementById("logoutBtn").addEventListener("click", async function(event) {
+
+    event.preventDefault();
+
+    const { error } = await supabaseClient.auth.signOut();
+
+    if (error) {
+        alert("Logout failed. Please try again.");
+        return;
+    }
+
+    window.location.href = "login.html";
+
+});
 </script>
 </body>
 </html>
