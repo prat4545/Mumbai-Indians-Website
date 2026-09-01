@@ -1,375 +1,480 @@
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<meta name="description" content="Mumbai Indians fan account">
+    <meta name="description" content="Mumbai Indians fan account">
 
-<title>My Account | Mumbai Indians</title>
+    <title>My Account | Mumbai Indians</title>
 
-<link rel="stylesheet" href="css_style.css">
+    <link rel="stylesheet" href="css_style.css">
 
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-```
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
+
 
 <body>
 
+
+<!-- ================= NAVBAR ================= -->
+
 <header class="navbar">
 
-```
-<a href="index.html" class="logo">
-    <img src="images/logo.png" alt="Mumbai Indians Logo">
-</a>
+    <a href="index.html" class="logo">
+        <img src="images/logo.png" alt="Mumbai Indians Logo">
+    </a>
 
-<div class="brand">
-    <span>MUMBAI INDIANS</span>
-    <small>#OneFamily</small>
-</div>
+    <div class="brand">
+        <span>MUMBAI INDIANS</span>
+        <small>#OneFamily</small>
+    </div>
 
-<nav>
-    <a href="index.html">Home</a>
-    <a href="matches.html">Matches</a>
-    <a href="about.html">About</a>
-    <a href="store.html">Store</a>
-    <a href="account.html" class="active">My Account</a>
-    <a href="#" class="login-btn" id="logoutBtn">Logout</a>
-</nav>
-```
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="matches.html">Matches</a>
+
+        <a href="about.html">About</a>
+
+        <a href="store.html">Store</a>
+
+        <a href="account.html" class="active">
+            My Account
+        </a>
+
+        <a href="#" class="login-btn" id="logoutBtn">
+            Logout
+        </a>
+
+    </nav>
 
 </header>
 
+
+
 <main>
+
 
 <!-- ================= ACCOUNT HERO ================= -->
 
 <section class="account-hero">
 
-```
-<div class="account-hero-content">
+    <div class="account-hero-content">
 
-    <p class="section-tag">
-        MUMBAI INDIANS • ONE FAMILY
-    </p>
+        <p class="section-tag">
+            MUMBAI INDIANS • ONE FAMILY
+        </p>
 
-    <h1>
-        My <span>Account</span>
-    </h1>
+        <h1>
+            My <span>Account</span>
+        </h1>
 
-    <p>
-        Manage your profile, tickets, orders and Mumbai Indians
-        activities from one place.
-    </p>
+        <p>
+            Manage your profile, tickets, orders and Mumbai Indians
+            activities from one place.
+        </p>
 
-</div>
-```
+    </div>
 
 </section>
 
-<!-- ================= PROFILE ================= -->
+
+
+<!-- ================= ACCOUNT SECTION ================= -->
 
 <section class="account-section">
 
-```
-<div class="account-profile-card">
 
-    <div class="profile-avatar">
-        <i class="fa-solid fa-user"></i>
-    </div>
+    <!-- ================= PROFILE ================= -->
 
-    <div class="profile-details">
+    <div class="account-profile-card">
 
-        <p class="profile-label">
-            WELCOME BACK
-        </p>
-
-        <h2>
-            Mumbai Indians Fan
-        </h2>
-
-        <p>
-            fan@example.com
-        </p>
-
-        <span class="member-badge">
-            <i class="fa-solid fa-star"></i>
-            ONE FAMILY MEMBER
-        </span>
-
-    </div>
-
-   <a href="#" class="edit-profile" id="editProfileBtn">
-        <i class="fa-solid fa-pen"></i>
-        Edit Profile
-    </a>
-
-</div>
-
-
-<!-- ================= ACCOUNT STATS ================= -->
-
-<div class="account-stats">
-
-    <div class="account-stat">
-
-        <i class="fa-solid fa-ticket"></i>
-
-        <div>
-            <strong>0</strong>
-            <span>Tickets</span>
+        <div class="profile-avatar">
+            <i class="fa-solid fa-user"></i>
         </div>
 
-    </div>
 
+        <div class="profile-details">
 
-    <div class="account-stat">
+            <p class="profile-label">
+                WELCOME BACK
+            </p>
 
-        <i class="fa-solid fa-bag-shopping"></i>
+            <h2 id="profileDisplayName">
+                Loading...
+            </h2>
 
-        <div>
-            <strong>0</strong>
-            <span>Orders</span>
+            <p id="profileDisplayEmail">
+                Loading...
+            </p>
+
+            <span class="member-badge">
+
+                <i class="fa-solid fa-star"></i>
+
+                ONE FAMILY MEMBER
+
+            </span>
+
         </div>
 
-    </div>
 
+        <a href="#" class="edit-profile" id="editProfileBtn">
 
-    <div class="account-stat">
+            <i class="fa-solid fa-pen"></i>
 
-        <i class="fa-solid fa-calendar-check"></i>
+            Edit Profile
 
-        <div>
-            <strong>0</strong>
-            <span>Bookings</span>
-        </div>
+        </a>
 
     </div>
 
 
-    <div class="account-stat">
 
-        <i class="fa-solid fa-heart"></i>
+    <!-- ================= ACCOUNT STATS ================= -->
 
-        <div>
-            <strong>MI</strong>
-            <span>Fan</span>
-        </div>
-
-    </div>
-
-</div>
+    <div class="account-stats">
 
 
-<!-- ================= ACCOUNT GRID ================= -->
+        <!-- TICKETS -->
 
-<div class="account-grid">
+        <div class="account-stat">
 
-
-    <!-- MY TICKETS -->
-
-    <div class="account-card">
-
-        <div class="account-card-icon">
             <i class="fa-solid fa-ticket"></i>
+
+            <div>
+
+                <strong id="ticketCount">
+                    0
+                </strong>
+
+                <span>
+                    Tickets
+                </span>
+
+            </div>
+
         </div>
 
-        <div>
 
-            <p class="card-small-title">
-                MATCH DAY
+
+        <!-- ORDERS -->
+
+        <div class="account-stat">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            <div>
+
+                <strong id="orderCount">
+                    0
+                </strong>
+
+                <span>
+                    Orders
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- BOOKINGS -->
+
+        <div class="account-stat">
+
+            <i class="fa-solid fa-calendar-check"></i>
+
+            <div>
+
+                <strong id="bookingCount">
+                    0
+                </strong>
+
+                <span>
+                    Bookings
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- FAN -->
+
+        <div class="account-stat">
+
+            <i class="fa-solid fa-heart"></i>
+
+            <div>
+
+                <strong>
+                    MI
+                </strong>
+
+                <span>
+                    Fan
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= ACCOUNT GRID ================= -->
+
+    <div class="account-grid">
+
+
+        <!-- MY TICKETS -->
+
+        <div class="account-card">
+
+            <div class="account-card-icon">
+
+                <i class="fa-solid fa-ticket"></i>
+
+            </div>
+
+
+            <div>
+
+                <p class="card-small-title">
+                    MATCH DAY
+                </p>
+
+                <h3>
+                    My Tickets
+                </h3>
+
+                <p>
+                    View your upcoming and previous
+                    Mumbai Indians match tickets.
+                </p>
+
+                <a href="matches.html" class="account-action">
+
+                    View Tickets
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MY ORDERS -->
+
+        <div class="account-card">
+
+            <div class="account-card-icon">
+
+                <i class="fa-solid fa-box"></i>
+
+            </div>
+
+
+            <div>
+
+                <p class="card-small-title">
+                    MI STORE
+                </p>
+
+                <h3>
+                    My Orders
+                </h3>
+
+                <p>
+                    Track merchandise orders and
+                    view your purchase history.
+                </p>
+
+                <a href="store.html" class="account-action">
+
+                    View Orders
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PROFILE SETTINGS -->
+
+        <div class="account-card">
+
+            <div class="account-card-icon">
+
+                <i class="fa-solid fa-user-gear"></i>
+
+            </div>
+
+
+            <div>
+
+                <p class="card-small-title">
+                    ACCOUNT
+                </p>
+
+                <h3>
+                    Profile Settings
+                </h3>
+
+                <p>
+                    Update your personal information
+                    and account preferences.
+                </p>
+
+                <a href="#"
+                   class="account-action"
+                   id="manageProfileBtn">
+
+                    Manage Profile
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SECURITY -->
+
+        <div class="account-card">
+
+            <div class="account-card-icon">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+            </div>
+
+
+            <div>
+
+                <p class="card-small-title">
+                    SECURITY
+                </p>
+
+                <h3>
+                    Account Security
+                </h3>
+
+                <p>
+                    Keep your account protected and
+                    manage your login credentials.
+                </p>
+
+                <a href="#" class="account-action">
+
+                    Security Settings
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= RECENT ACTIVITY ================= -->
+
+    <div class="activity-section">
+
+
+        <div class="page-section-heading">
+
+            <p class="section-tag">
+                ACCOUNT ACTIVITY
             </p>
 
+            <h2>
+                Recent <span>Activity</span>
+            </h2>
+
+        </div>
+
+
+        <div class="empty-activity" id="activityContainer">
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
             <h3>
-                My Tickets
+                Loading activity...
             </h3>
 
             <p>
-                View your upcoming and previous
-                Mumbai Indians match tickets.
+                Please wait while we load your account activity.
             </p>
-
-            <a href="matches.html" class="account-action">
-                View Tickets
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
 
         </div>
 
     </div>
 
-
-    <!-- MY ORDERS -->
-
-    <div class="account-card">
-
-        <div class="account-card-icon">
-            <i class="fa-solid fa-box"></i>
-        </div>
-
-        <div>
-
-            <p class="card-small-title">
-                MI STORE
-            </p>
-
-            <h3>
-                My Orders
-            </h3>
-
-            <p>
-                Track merchandise orders and
-                view your purchase history.
-            </p>
-
-            <a href="store.html" class="account-action">
-                View Orders
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-        </div>
-
-    </div>
-
-
-    <!-- PROFILE -->
-
-    <div class="account-card">
-
-        <div class="account-card-icon">
-            <i class="fa-solid fa-user-gear"></i>
-        </div>
-
-        <div>
-
-            <p class="card-small-title">
-                ACCOUNT
-            </p>
-
-            <h3>
-                Profile Settings
-            </h3>
-
-            <p>
-                Update your personal information
-                and account preferences.
-            </p>
-
-           <a href="#" class="account-action" id="manageProfileBtn">
-    Manage Profile
-                Manage Profile
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-        </div>
-
-    </div>
-
-
-    <!-- SECURITY -->
-
-    <div class="account-card">
-
-        <div class="account-card-icon">
-            <i class="fa-solid fa-shield-halved"></i>
-        </div>
-
-        <div>
-
-            <p class="card-small-title">
-                SECURITY
-            </p>
-
-            <h3>
-                Account Security
-            </h3>
-
-            <p>
-                Keep your account protected and
-                manage your login credentials.
-            </p>
-
-            <a href="#" class="account-action">
-                Security Settings
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- ================= RECENT ACTIVITY ================= -->
-
-<div class="activity-section">
-
-    <div class="page-section-heading">
-
-        <p class="section-tag">
-            ACCOUNT ACTIVITY
-        </p>
-
-        <h2>
-            Recent <span>Activity</span>
-        </h2>
-
-    </div>
-
-
-    <div class="empty-activity">
-
-        <i class="fa-regular fa-calendar-xmark"></i>
-
-        <h3>
-            No activity yet
-        </h3>
-
-        <p>
-            Your ticket bookings and store orders
-            will appear here.
-        </p>
-
-        <div class="activity-buttons">
-
-            <a href="matches.html" class="primary-btn">
-                Explore Matches
-            </a>
-
-            <a href="store.html" class="secondary-btn">
-                Visit Store
-            </a>
-
-        </div>
-
-    </div>
-
-</div>
-```
 
 </section>
+
+
+
 <!-- ================= EDIT PROFILE MODAL ================= -->
 
 <div class="profile-modal" id="profileModal">
 
+
     <div class="profile-modal-content">
 
-        <button class="close-modal" id="closeProfileModal">
+
+        <button class="close-modal"
+                id="closeProfileModal"
+                type="button">
+
             <i class="fa-solid fa-xmark"></i>
+
         </button>
 
-        <p class="section-tag">ACCOUNT SETTINGS</p>
+
+        <p class="section-tag">
+            ACCOUNT SETTINGS
+        </p>
+
 
         <h2>
             Edit <span>Profile</span>
         </h2>
 
+
+
         <form id="profileForm">
+
+
+            <!-- NAME -->
 
             <div class="input-group">
 
@@ -392,6 +497,9 @@
             </div>
 
 
+
+            <!-- EMAIL -->
+
             <div class="input-group">
 
                 <label for="profileEmail">
@@ -413,6 +521,9 @@
             </div>
 
 
+
+            <!-- MOBILE -->
+
             <div class="input-group">
 
                 <label for="profileMobile">
@@ -427,6 +538,7 @@
                         type="tel"
                         id="profileMobile"
                         maxlength="10"
+                        pattern="[0-9]{10}"
                     >
 
                 </div>
@@ -434,7 +546,9 @@
             </div>
 
 
-            <button type="submit" class="login-submit">
+
+            <button type="submit"
+                    class="login-submit">
 
                 Save Changes
 
@@ -442,303 +556,954 @@
 
             </button>
 
+
         </form>
+
 
     </div>
 
 </div>
+
+
 </main>
+
+
+
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
-```
-<div class="footer-content">
 
-    <div class="footer-brand">
-
-        <img src="images/logo.png"
-             alt="Mumbai Indians">
-
-        <h3>MUMBAI INDIANS</h3>
-
-        <p>#OneFamily</p>
-
-    </div>
+    <div class="footer-content">
 
 
-    <div class="footer-links">
+        <!-- BRAND -->
 
-        <h4>EXPLORE</h4>
+        <div class="footer-brand">
 
-        <a href="index.html">Home</a>
-        <a href="matches.html">Matches</a>
-        <a href="about.html">About</a>
-        <a href="store.html">Store</a>
+            <img src="images/logo.png"
+                 alt="Mumbai Indians">
 
-    </div>
+            <h3>
+                MUMBAI INDIANS
+            </h3>
 
+            <p>
+                #OneFamily
+            </p>
 
-    <div class="footer-links">
-
-        <h4>ACCOUNT</h4>
-
-        <a href="account.html">My Account</a>
-        <a href="matches.html">My Tickets</a>
-        <a href="store.html">My Orders</a>
-
-    </div>
+        </div>
 
 
-    <div class="footer-social">
 
-        <h4>FOLLOW THE FAMILY</h4>
+        <!-- EXPLORE -->
 
-        <div>
+        <div class="footer-links">
 
-            <a href="#" aria-label="Facebook">
-                <i class="fa-brands fa-facebook-f"></i>
+            <h4>
+                EXPLORE
+            </h4>
+
+            <a href="index.html">
+                Home
             </a>
 
-            <a href="#" aria-label="Instagram">
-                <i class="fa-brands fa-instagram"></i>
+            <a href="matches.html">
+                Matches
             </a>
 
-            <a href="#" aria-label="X">
-                <i class="fa-brands fa-x-twitter"></i>
+            <a href="about.html">
+                About
             </a>
 
-            <a href="#" aria-label="YouTube">
-                <i class="fa-brands fa-youtube"></i>
+            <a href="store.html">
+                Store
             </a>
 
         </div>
 
+
+
+        <!-- ACCOUNT -->
+
+        <div class="footer-links">
+
+            <h4>
+                ACCOUNT
+            </h4>
+
+            <a href="account.html">
+                My Account
+            </a>
+
+            <a href="matches.html">
+                My Tickets
+            </a>
+
+            <a href="store.html">
+                My Orders
+            </a>
+
+        </div>
+
+
+
+        <!-- SOCIAL -->
+
+        <div class="footer-social">
+
+            <h4>
+                FOLLOW THE FAMILY
+            </h4>
+
+            <div>
+
+                <a href="#" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+
+                <a href="#" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="#" aria-label="X">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+
+                <a href="#" aria-label="YouTube">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+
     </div>
 
-</div>
 
 
-<div class="copyright">
+    <div class="copyright">
 
-    © 2026 Mumbai Indians Fan Website
-    • Designed by PRATIK
+        © 2026 Mumbai Indians Fan Website
+        • Designed by PRATIK
 
-</div>
-```
+    </div>
+
 
 </footer>
+
+
+
+<!-- ================= SUPABASE ACCOUNT LOGIC ================= -->
+
 <script>
 
-const SUPABASE_URL = "https://ukksxlhopvemunyibusg.supabase.co";
-const SUPABASE_KEY = "sb_publishable_0hFYgocoBicqr-nAMRuXYw_Zrecb0Qo";
+const SUPABASE_URL =
+    "https://ukksxlhopvemunyibusg.supabase.co";
 
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+const SUPABASE_KEY =
+    "sb_publishable_0hFYgocoBicqr-nAMRuXYw_Zrecb0Qo";
 
 
-async function loadUserProfile() {
-
-    const { data, error } = await supabaseClient.auth.getUser();
-
-    if (error || !data.user) {
-
-        window.location.href = "login.html";
-        return;
-
-    }
-
-    const user = data.user;
-
-    const fullName =
-        user.user_metadata?.full_name ||
-        "Mumbai Indians Fan";
-
-    const email =
-        user.email ||
-        "fan@example.com";
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
-    document.querySelector(".profile-details h2").textContent =
-        fullName;
 
-    document.querySelector(".profile-details > p:nth-of-type(2)").textContent =
-        email;
+/* =========================
+   LOAD ACCOUNT
+========================= */
 
-}
+async function loadAccount() {
 
-
-async function logoutUser(event) {
-
-    event.preventDefault();
-
-    const { error } = await supabaseClient.auth.signOut();
-
-    if (error) {
-
-        alert(error.message);
-        return;
-
-    }
-
-    alert("Logged out successfully!");
-
-    window.location.href = "index.html";
-
-}
+    try {
 
 
-document.addEventListener("DOMContentLoaded", function () {
+        /* =========================
+           CURRENT USER
+        ========================= */
 
-    loadUserProfile();
+        const {
+            data: { user },
+            error: userError
+        } = await supabaseClient.auth.getUser();
 
-    const logoutButton =
-        document.querySelector(".login-btn");
 
-    if (logoutButton) {
+        if (userError || !user) {
 
-        logoutButton.addEventListener(
-            "click",
-            logoutUser
+            window.location.href = "login.html";
+
+            return;
+
+        }
+
+
+
+        /* =========================
+           PROFILE
+        ========================= */
+
+        const {
+            data: profile,
+            error: profileError
+        } = await supabaseClient
+
+            .from("profiles")
+
+            .select("full_name, email, mobile")
+
+            .eq("id", user.id)
+
+            .maybeSingle();
+
+
+        if (profileError) {
+
+            console.error(
+                "Profile Error:",
+                profileError
+            );
+
+        }
+
+
+        const fullName =
+            profile?.full_name ||
+            user.user_metadata?.full_name ||
+            "Mumbai Indians Fan";
+
+
+        const email =
+            profile?.email ||
+            user.email ||
+            "";
+
+
+        const mobile =
+            profile?.mobile ||
+            user.user_metadata?.mobile ||
+            "";
+
+
+
+        /* DISPLAY PROFILE */
+
+        document
+            .getElementById("profileDisplayName")
+            .textContent = fullName;
+
+
+        document
+            .getElementById("profileDisplayEmail")
+            .textContent = email;
+
+
+
+        /* EDIT PROFILE */
+
+        document
+            .getElementById("profileName")
+            .value = fullName;
+
+
+        document
+            .getElementById("profileEmail")
+            .value = email;
+
+
+        document
+            .getElementById("profileMobile")
+            .value = mobile;
+
+
+
+        /* =========================
+           LOAD BOOKINGS
+        ========================= */
+
+        const {
+            data: bookings,
+            error: bookingsError
+        } = await supabaseClient
+
+            .from("bookings")
+
+            .select(`
+                id,
+                booking_reference,
+                total_amount,
+                booking_status,
+                created_at,
+                match_id,
+                booking_items (
+                    quantity
+                )
+            `)
+
+            .eq("user_id", user.id)
+
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+        if (bookingsError) {
+
+            console.error(
+                "Bookings Error:",
+                bookingsError
+            );
+
+        }
+
+
+        const userBookings =
+            bookings || [];
+
+
+
+        /* =========================
+           TICKET COUNT
+        ========================= */
+
+        let ticketCount = 0;
+
+
+        userBookings.forEach(
+            booking => {
+
+                if (
+                    booking.booking_items
+                ) {
+
+                    booking.booking_items.forEach(
+                        item => {
+
+                            ticketCount +=
+                                Number(
+                                    item.quantity
+                                ) || 0;
+
+                        }
+                    );
+
+                }
+
+            }
+        );
+
+
+
+        /* =========================
+           LOAD ORDERS
+        ========================= */
+
+        const {
+            data: orders,
+            error: ordersError
+        } = await supabaseClient
+
+            .from("orders")
+
+            .select(
+                "id, product_name, quantity, amount, status, created_at"
+            )
+
+            .eq("user_id", user.id)
+
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+        if (ordersError) {
+
+            console.error(
+                "Orders Error:",
+                ordersError
+            );
+
+        }
+
+
+        const userOrders =
+            orders || [];
+
+
+
+        /* =========================
+           UPDATE STATS
+        ========================= */
+
+        document
+            .getElementById("ticketCount")
+            .textContent = ticketCount;
+
+
+        document
+            .getElementById("orderCount")
+            .textContent =
+                userOrders.length;
+
+
+        document
+            .getElementById("bookingCount")
+            .textContent =
+                userBookings.length;
+
+
+
+        /* =========================
+           RECENT ACTIVITY
+        ========================= */
+
+        renderRecentActivity(
+            userBookings,
+            userOrders
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Account Error:",
+            error
         );
 
     }
 
-});
-
-</script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-const SUPABASE_URL = "https://ukksxlhopvemunyibusg.supabase.co";
-const SUPABASE_KEY = "sb_publishable_0hFYgocoBicqr-nAMRuXYw_Zrecb0Qo";
-
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+}
 
 
-async function loadUserProfile() {
 
-    const { data, error } = await supabaseClient.auth.getUser();
+/* =========================
+   RECENT ACTIVITY
+========================= */
 
-    if (error || !data.user) {
+function renderRecentActivity(
+    bookings,
+    orders
+) {
 
-        window.location.href = "login.html";
+
+    const container =
+        document.getElementById(
+            "activityContainer"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    const activities = [];
+
+
+
+    /* BOOKINGS */
+
+    bookings.forEach(
+        booking => {
+
+            activities.push({
+
+                type: "booking",
+
+                date: new Date(
+                    booking.created_at
+                ),
+
+                title:
+                    "Match Booking",
+
+                description:
+                    `Booking #${
+                        booking.booking_reference
+                    }`
+
+            });
+
+        }
+    );
+
+
+
+    /* ORDERS */
+
+    orders.forEach(
+        order => {
+
+            activities.push({
+
+                type: "order",
+
+                date: new Date(
+                    order.created_at
+                ),
+
+                title:
+                    "Store Order",
+
+                description:
+                    `${order.product_name} • Quantity: ${
+                        order.quantity
+                    }`
+
+            });
+
+        }
+    );
+
+
+
+    /* NO ACTIVITY */
+
+    if (!activities.length) {
+
+        container.innerHTML = `
+
+            <i class="fa-regular fa-calendar-xmark"></i>
+
+            <h3>
+                No activity yet
+            </h3>
+
+            <p>
+                Your ticket bookings and store orders
+                will appear here.
+            </p>
+
+            <div class="activity-buttons">
+
+                <a
+                    href="matches.html"
+                    class="primary-btn"
+                >
+                    Explore Matches
+                </a>
+
+                <a
+                    href="store.html"
+                    class="secondary-btn"
+                >
+                    Visit Store
+                </a>
+
+            </div>
+
+        `;
+
         return;
 
     }
 
-    const user = data.user;
 
 
-    const { data: profile, error: profileError } =
-        await supabaseClient
-            .from("profiles")
-            .select("*")
-            .eq("id", user.id)
-            .single();
+    /* SORT */
+
+    activities.sort(
+        (a, b) =>
+            b.date - a.date
+    );
 
 
-    const profileName =
-        profile?.full_name ||
-        user.user_metadata?.full_name ||
-        "Mumbai Indians Fan";
+
+    /* LATEST 5 */
+
+    const latestActivities =
+        activities.slice(0, 5);
 
 
-    const profileEmail =
-        profile?.email ||
-        user.email;
+
+    container.innerHTML = `
+
+        <div class="activity-list">
+
+            ${latestActivities.map(
+                activity => `
+
+                <div class="activity-item">
+
+                    <div class="activity-icon">
+
+                        <i class="fa-solid ${
+                            activity.type === "booking"
+                                ? "fa-ticket"
+                                : "fa-box"
+                        }"></i>
+
+                    </div>
 
 
-    document.querySelector(".profile-details h2").textContent =
-        profileName;
+                    <div class="activity-content">
 
-    document.querySelector(".profile-details > p:not(.profile-label)")
-        .textContent = profileEmail;
+                        <h4>
+                            ${activity.title}
+                        </h4>
+
+                        <p>
+                            ${activity.description}
+                        </p>
+
+                        <small>
+                            ${formatActivityDate(
+                                activity.date
+                            )}
+                        </small>
+
+                    </div>
+
+                </div>
+
+            `
+            ).join("")}
+
+        </div>
+
+    `;
 
 }
 
 
-loadUserProfile();
-    document.getElementById("editProfileBtn").addEventListener("click", function(event) {
-    event.preventDefault();
 
-    document.getElementById("profileModal").classList.add("active");
-});
+/* =========================
+   FORMAT DATE
+========================= */
 
+function formatActivityDate(date) {
 
-document.getElementById("manageProfileBtn").addEventListener("click", function(event) {
-    event.preventDefault();
+    if (
+        !date ||
+        isNaN(date)
+    ) {
 
-    document.getElementById("profileModal").classList.add("active");
-});
+        return "";
 
-
-document.getElementById("closeProfileModal").addEventListener("click", function() {
-    document.getElementById("profileModal").classList.remove("active");
-});
-
-
-document.getElementById("profileForm").addEventListener("submit", async function(event) {
-
-    event.preventDefault();
-
-    const name = document.getElementById("profileName").value.trim();
-    const mobile = document.getElementById("profileMobile").value.trim();
-
-    const { data: userData, error: userError } =
-        await supabaseClient.auth.getUser();
-
-    if (userError || !userData.user) {
-        window.location.href = "login.html";
-        return;
     }
 
-    const user = userData.user;
 
-    const { error } = await supabaseClient
-        .from("profiles")
-        .update({
-            full_name: name,
-            mobile: mobile
-        })
-        .eq("id", user.id);
-
-    if (error) {
-        alert(error.message);
-        return;
-    }
-
-    await supabaseClient.auth.updateUser({
-        data: {
-            full_name: name,
-            mobile: mobile
+    return date.toLocaleDateString(
+        "en-IN",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
         }
-    });
+    );
 
-    document.querySelector(".profile-details h2").textContent = name;
+}
 
-    alert("Profile updated successfully!");
 
-    document.getElementById("profileModal").classList.remove("active");
-});
-    document.getElementById("logoutBtn").addEventListener("click", async function(event) {
+
+/* =========================
+   OPEN PROFILE MODAL
+========================= */
+
+function openProfileModal(event) {
 
     event.preventDefault();
 
-    const { error } = await supabaseClient.auth.signOut();
 
-    if (error) {
-        alert("Logout failed. Please try again.");
-        return;
+    document
+        .getElementById("profileModal")
+        .classList.add("active");
+
+}
+
+
+
+document
+    .getElementById("editProfileBtn")
+    .addEventListener(
+        "click",
+        openProfileModal
+    );
+
+
+document
+    .getElementById("manageProfileBtn")
+    .addEventListener(
+        "click",
+        openProfileModal
+    );
+
+
+
+/* =========================
+   CLOSE PROFILE MODAL
+========================= */
+
+document
+    .getElementById("closeProfileModal")
+    .addEventListener(
+        "click",
+        function () {
+
+            document
+                .getElementById("profileModal")
+                .classList.remove(
+                    "active"
+                );
+
+        }
+    );
+
+
+
+/* =========================
+   SAVE PROFILE
+========================= */
+
+document
+    .getElementById("profileForm")
+    .addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            const name =
+                document
+                    .getElementById(
+                        "profileName"
+                    )
+                    .value
+                    .trim();
+
+
+            const mobile =
+                document
+                    .getElementById(
+                        "profileMobile"
+                    )
+                    .value
+                    .trim();
+
+
+
+            if (!name) {
+
+                alert(
+                    "Please enter your full name."
+                );
+
+                return;
+
+            }
+
+
+
+            if (
+                mobile &&
+                !/^[0-9]{10}$/.test(mobile)
+            ) {
+
+                alert(
+                    "Please enter a valid 10-digit mobile number."
+                );
+
+                return;
+
+            }
+
+
+
+            /* CURRENT USER */
+
+            const {
+                data: { user },
+                error: userError
+            } =
+                await supabaseClient.auth.getUser();
+
+
+            if (
+                userError ||
+                !user
+            ) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+
+            /* UPDATE PROFILE TABLE */
+
+            const {
+                error: profileError
+            } =
+                await supabaseClient
+
+                    .from("profiles")
+
+                    .update({
+
+                        full_name: name,
+
+                        mobile: mobile
+
+                    })
+
+                    .eq(
+                        "id",
+                        user.id
+                    );
+
+
+
+            if (profileError) {
+
+                console.error(
+                    "Profile Update Error:",
+                    profileError
+                );
+
+                alert(
+                    "Unable to update profile: " +
+                    profileError.message
+                );
+
+                return;
+
+            }
+
+
+
+            /* UPDATE AUTH METADATA */
+
+            const {
+                error: authError
+            } =
+                await supabaseClient.auth.updateUser({
+
+                    data: {
+
+                        full_name: name,
+
+                        mobile: mobile
+
+                    }
+
+                });
+
+
+            if (authError) {
+
+                console.error(
+                    "Auth Metadata Error:",
+                    authError
+                );
+
+            }
+
+
+
+            /* UPDATE SCREEN */
+
+            document
+                .getElementById(
+                    "profileDisplayName"
+                )
+                .textContent = name;
+
+
+            document
+                .getElementById(
+                    "profileMobile"
+                )
+                .value = mobile;
+
+
+
+            document
+                .getElementById(
+                    "profileModal"
+                )
+                .classList.remove(
+                    "active"
+                );
+
+
+            alert(
+                "Profile updated successfully!"
+            );
+
+        }
+    );
+
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document
+    .getElementById("logoutBtn")
+    .addEventListener(
+        "click",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            const {
+                error
+            } =
+                await supabaseClient
+                    .auth
+                    .signOut();
+
+
+            if (error) {
+
+                alert(
+                    "Logout failed. Please try again."
+                );
+
+                return;
+
+            }
+
+
+            window.location.href =
+                "login.html";
+
+        }
+    );
+
+
+
+/* =========================
+   START ACCOUNT
+========================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        loadAccount();
+
     }
+);
 
-    window.location.href = "login.html";
-
-});
 </script>
+
+
 </body>
 </html>
