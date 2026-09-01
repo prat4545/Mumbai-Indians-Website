@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Tickets | Mumbai Indians</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #172033;
+        }
+
+        .booking-header {
+            background: linear-gradient(135deg, #004ba8, #00245f);
+            color: white;
+            padding: 28px 7%;
+        }
+
+        .booking-header a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .booking-header h1 {
+            margin-top: 18px;
+            font-size: 34px;
+        }
+
+        .booking-container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: 1.3fr .7fr;
+            gap: 25px;
+        }
+
+        .booking-card,
+        .summary-card {
+            background: white;
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, .08);
+        }
+
+        .match-info {
+            border-bottom: 1px solid #e5e9f0;
+            padding-bottom: 22px;
+            margin-bottom: 25px;
+        }
+
+        .match-info h2 {
+            color: #004ba8;
+            margin-bottom: 10px;
+        }
+
+        .match-info p {
+            margin: 8px 0;
+            color: #657083;
+        }
+
+        .match-info i {
+            width: 22px;
+            color: #004ba8;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 9px;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d7dce5;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        select:focus,
+        input:focus {
+            border-color: #004ba8;
+        }
+
+        .ticket-option {
+            border: 1px solid #dfe4ec;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .ticket-option:hover {
+            border-color: #004ba8;
+            transform: translateY(-1px);
+        }
+
+        .ticket-option.active {
+            border: 2px solid #004ba8;
+            background: #f1f7ff;
+        }
+
+        .ticket-option strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .ticket-option span {
+            color: #667085;
+            font-size: 14px;
+        }
+
+        .quantity-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quantity-row button {
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 9px;
+            background: #004ba8;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .quantity-row input {
+            width: 70px;
+            text-align: center;
+        }
+
+        .summary-card h2 {
+            color: #004ba8;
+            margin-bottom: 22px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid #edf0f4;
+        }
+
+        .summary-row span:first-child {
+            color: #667085;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 22px;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 15px;
+            border: none;
+            border-radius: 11px;
+            background: #f5b800;
+            color: #111;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .confirm-btn:hover {
+            background: #e5aa00;
+        }
+
+        .confirm-btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-top: 18px;
+            padding: 13px;
+            border-radius: 9px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .message.success {
+            display: block;
+            background: #e8f7ed;
+            color: #176b35;
+        }
+
+        .message.error {
+            display: block;
+            background: #fff0f0;
+            color: #b42318;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #667085;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px 10px;
+            color: #667085;
+        }
+
+        @media (max-width: 800px) {
+            .booking-container {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-header h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="booking-header">
+
+    <a href="matches.html">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Matches
+    </a>
+
+    <h1>Book Mumbai Indians Tickets</h1>
+
+</header>
+
+
+<main class="booking-container">
+
+    <section class="booking-card">
+
+        <div id="loadingMessage" class="loading">
+            Loading match details...
+        </div>
+
+        <div id="bookingContent" style="display:none;">
+
+            <div class="match-info">
+
+                <h2 id="matchTitle">Mumbai Indians vs Opponent</h2>
+
+                <p>
+                    <i class="fa-regular fa-calendar"></i>
+                    <span id="matchDate">Date</span>
+                </p>
+
+                <p>
+                    <i class="fa-regular fa-clock"></i>
+                    <span id="matchTime">Time</span>
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span id="matchVenue">Venue</span>
+                </p>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Choose Ticket Category</label>
+
+                <div id="ticketOptions">
+                    Loading tickets...
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Number of Tickets</label>
+
+                <div class="quantity-row">
+
+                    <button type="button" id="minusBtn">
+                        −
+                    </button>
+
+                    <input
+                        type="number"
+                        id="quantity"
+                        value="1"
+                        min="1"
+                        max="10"
+                    >
+
+                    <button type="button" id="plusBtn">
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <aside class="summary-card">
+
+        <h2>Booking Summary</h2>
+
+        <div class="summary-row">
+            <span>Ticket</span>
+            <strong id="summaryTicket">-</strong>
+        </div>
+
+        <div class="summary-row">
+            <span>Price</span>
+            <strong id="summaryPrice">₹0</strong>
+        </div>
+
+        <div class="summary-row">
+            <span>Quantity</span>
+            <strong id="summaryQuantity">1</strong>
+        </div>
+
+        <div class="summary-total">
+            <span>Total</span>
+            <span id="summaryTotal">₹0</span>
+        </div>
+
+        <button
+            type="button"
+            class="confirm-btn"
+            id="confirmBookingBtn"
+            disabled
+        >
+            <i class="fa-solid fa-ticket"></i>
+            Confirm Booking
+        </button>
+
+        <div id="message" class="message"></div>
+
+    </aside>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+    const SUPABASE_URL =
+        "https://ukksxlhopvemunyibusg.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_0hFYgocoBicqr-nAMRuXYw_Zrecb0Qo";
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    const params = new URLSearchParams(window.location.search);
+
+    const matchId = params.get("match_id");
+
+
+    let match = null;
+    let tickets = [];
+    let selectedTicket = null;
+
+
+    const loadingMessage =
+        document.getElementById("loadingMessage");
+
+    const bookingContent =
+        document.getElementById("bookingContent");
+
+    const ticketOptions =
+        document.getElementById("ticketOptions");
+
+    const quantityInput =
+        document.getElementById("quantity");
+
+    const confirmButton =
+        document.getElementById("confirmBookingBtn");
+
+
+    async function initializeBooking() {
+
+        if (!matchId) {
+
+            showError(
+                "No match selected. Please return to the Matches page."
+            );
+
+            loadingMessage.style.display = "none";
+
+            return;
+        }
+
+
+        const {
+            data: {
+                user
+            }
+        } = await supabaseClient.auth.getUser();
+
+
+        if (!user) {
+
+            window.location.href =
+                `login.html?redirect=booking.html?match_id=${matchId}`;
+
+            return;
+        }
+
+
+        await loadMatch();
+
+        await loadTickets();
+
+    }
+
+
+    async function loadMatch() {
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+
+            .from("matches")
+
+            .select("*")
+
+            .eq("id", matchId)
+
+            .single();
+
+
+        if (error || !data) {
+
+            showError(
+                "Unable to load match details."
+            );
+
+            return;
+        }
+
+
+        match = data;
+
+
+        document.getElementById("matchTitle")
+            .textContent =
+            `Mumbai Indians vs ${match.opponent}`;
+
+
+        document.getElementById("matchDate")
+            .textContent =
+            match.match_date || "Date TBA";
+
+
+        document.getElementById("matchTime")
+            .textContent =
+            match.match_time || "Time TBA";
+
+
+        document.getElementById("matchVenue")
+            .textContent =
+            `${match.venue || "Venue TBA"}${match.city ? ", " + match.city : ""}`;
+
+
+        loadingMessage.style.display = "none";
+
+        bookingContent.style.display = "block";
+    }
+
+
+    async function loadTickets() {
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+
+            .from("tickets")
+
+            .select("*")
+
+            .eq("match_id", matchId)
+
+            .order("price", {
+                ascending: true
+            });
+
+
+        if (error) {
+
+            showError(
+                "Unable to load ticket categories."
+            );
+
+            return;
+        }
+
+
+        tickets = data || [];
+
+
+        if (!tickets.length) {
+
+            ticketOptions.innerHTML = `
+                <div class="empty">
+                    Tickets are not available for this match yet.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        renderTickets();
+    }
+
+
+    function renderTickets() {
+
+        ticketOptions.innerHTML = "";
+
+
+        tickets.forEach(ticket => {
+
+            const option =
+                document.createElement("div");
+
+
+            option.className =
+                "ticket-option";
+
+
+            option.innerHTML = `
+                <strong>${escapeHtml(ticket.category)}</strong>
+
+                <span>
+                    ₹${Number(ticket.price).toLocaleString("en-IN")}
+                    · ${ticket.available_seats} seats available
+                </span>
+            `;
+
+
+            option.addEventListener(
+                "click",
+                () => selectTicket(ticket, option)
+            );
+
+
+            ticketOptions.appendChild(option);
+
+        });
+
+    }
+
+
+    function selectTicket(ticket, element) {
+
+        selectedTicket = ticket;
+
+
+        document
+            .querySelectorAll(".ticket-option")
+            .forEach(item =>
+                item.classList.remove("active")
+            );
+
+
+        element.classList.add("active");
+
+
+        const maxSeats =
+            Math.min(ticket.available_seats, 10);
+
+
+        quantityInput.max = maxSeats;
+
+
+        if (Number(quantityInput.value) > maxSeats) {
+            quantityInput.value = maxSeats;
+        }
+
+
+        updateSummary();
+
+
+        confirmButton.disabled =
+            ticket.available_seats <= 0;
+    }
+
+
+    function updateSummary() {
+
+        const quantity =
+            Math.max(
+                1,
+                Number(quantityInput.value) || 1
+            );
+
+
+        document.getElementById("summaryQuantity")
+            .textContent = quantity;
+
+
+        if (!selectedTicket) {
+
+            document.getElementById("summaryTicket")
+                .textContent = "-";
+
+            document.getElementById("summaryPrice")
+                .textContent = "₹0";
+
+            document.getElementById("summaryTotal")
+                .textContent = "₹0";
+
+            return;
+        }
+
+
+        const price =
+            Number(selectedTicket.price);
+
+
+        const total =
+            price * quantity;
+
+
+        document.getElementById("summaryTicket")
+            .textContent =
+            selectedTicket.category;
+
+
+        document.getElementById("summaryPrice")
+            .textContent =
+            `₹${price.toLocaleString("en-IN")}`;
+
+
+        document.getElementById("summaryTotal")
+            .textContent =
+            `₹${total.toLocaleString("en-IN")}`;
+    }
+
+
+    document.getElementById("minusBtn")
+        .addEventListener("click", () => {
+
+            let quantity =
+                Number(quantityInput.value) || 1;
+
+            if (quantity > 1) {
+
+                quantityInput.value =
+                    quantity - 1;
+
+                updateSummary();
+            }
+
+        });
+
+
+    document.getElementById("plusBtn")
+        .addEventListener("click", () => {
+
+            let quantity =
+                Number(quantityInput.value) || 1;
+
+            const max =
+                Number(quantityInput.max) || 10;
+
+
+            if (quantity < max) {
+
+                quantityInput.value =
+                    quantity + 1;
+
+                updateSummary();
+            }
+
+        });
+
+
+    quantityInput.addEventListener(
+        "input",
+        updateSummary
+    );
+
+
+    confirmButton.addEventListener(
+        "click",
+        createBooking
+    );
+
+
+    async function createBooking() {
+
+        if (!selectedTicket) {
+
+            showError(
+                "Please select a ticket category."
+            );
+
+            return;
+        }
+
+
+        let quantity =
+            Number(quantityInput.value);
+
+
+        if (
+            !Number.isInteger(quantity) ||
+            quantity < 1
+        ) {
+
+            showError(
+                "Please enter a valid quantity."
+            );
+
+            return;
+        }
+
+
+        if (
+            quantity >
+            selectedTicket.available_seats
+        ) {
+
+            showError(
+                "Not enough seats available."
+            );
+
+            return;
+        }
+
+
+        confirmButton.disabled = true;
+
+        confirmButton.innerHTML =
+            `<i class="fa-solid fa-spinner fa-spin"></i>
+             Booking...`;
+
+
+        const {
+            data,
+            error
+        } = await supabaseClient.rpc(
+            "create_ticket_booking",
+            {
+                p_match_id: Number(matchId),
+                p_ticket_id: selectedTicket.id,
+                p_quantity: quantity
+            }
+        );
+
+
+        if (error) {
+
+            console.error(
+                "Booking Error:",
+                error
+            );
+
+            showError(
+                error.message ||
+                "Unable to complete booking."
+            );
+
+
+            confirmButton.disabled = false;
+
+            confirmButton.innerHTML =
+                `<i class="fa-solid fa-ticket"></i>
+                 Confirm Booking`;
+
+            return;
+        }
+
+
+        showSuccess(
+            `Booking confirmed! Reference: ${data.booking_reference}`
+        );
+
+
+        confirmButton.innerHTML =
+            `<i class="fa-solid fa-check"></i>
+             Booking Confirmed`;
+
+
+        setTimeout(() => {
+
+            window.location.href =
+                "account.html";
+
+        }, 1800);
+
+    }
+
+
+    function showError(message) {
+
+        const box =
+            document.getElementById("message");
+
+        box.className =
+            "message error";
+
+        box.textContent =
+            message;
+
+    }
+
+
+    function showSuccess(message) {
+
+        const box =
+            document.getElementById("message");
+
+        box.className =
+            "message success";
+
+        box.textContent =
+            message;
+
+    }
+
+
+    function escapeHtml(value) {
+
+        return String(value)
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#039;");
+
+    }
+
+
+    initializeBooking();
+
+</script>
+
+</body>
+</html>
