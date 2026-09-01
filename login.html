@@ -1,213 +1,792 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<meta name="description" content="Mumbai Indians fan website login">
+    <meta name="description"
+          content="Mumbai Indians fan website login">
 
-<title>Login | Mumbai Indians</title>
+    <title>Login | Mumbai Indians</title>
 
-<link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/login.css">
 
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-```
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 </head>
 
+
 <body>
+
 
 <div class="login-page">
 
-```
-<div class="login-decoration decoration-one"></div>
-<div class="login-decoration decoration-two"></div>
+    <div class="login-decoration decoration-one"></div>
+    <div class="login-decoration decoration-two"></div>
 
 
-<div class="login-container">
+    <div class="login-container">
 
-    <div class="login-brand">
 
-        <a href="index.html" class="back-home">
-            <i class="fa-solid fa-arrow-left"></i>
-            Back to Home
-        </a>
+        <!-- ================= BRAND ================= -->
 
-        <div class="login-logo">
-            <img src="images/logo.png" alt="Mumbai Indians Logo">
+        <div class="login-brand">
+
+            <a href="index.html"
+               class="back-home">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Home
+
+            </a>
+
+
+            <div class="login-logo">
+
+                <img
+                    src="images/logo.png"
+                    alt="Mumbai Indians Logo">
+
+            </div>
+
+
+            <p class="brand-tag">
+                #ONEFAMILY
+            </p>
+
+
+            <h1>
+                Welcome Back
+            </h1>
+
+
+            <p>
+                Login to continue your Mumbai Indians experience.
+            </p>
+
         </div>
 
-        <p class="brand-tag">#ONEFAMILY</p>
 
-        <h1>Welcome Back</h1>
 
-        <p>
-            Login to continue your Mumbai Indians experience.
-        </p>
+        <!-- ================= LOGIN FORM ================= -->
+
+        <form class="login-form"
+              id="loginForm">
+
+
+            <!-- EMAIL -->
+
+            <div class="input-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+
+                <div class="input-box">
+
+                    <i class="fa-regular fa-envelope"></i>
+
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PASSWORD -->
+
+            <div class="input-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+
+                <div class="input-box">
+
+                    <i class="fa-solid fa-lock"></i>
+
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required>
+
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="passwordToggle"
+                        aria-label="Show password">
+
+                        <i class="fa-regular fa-eye"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- OPTIONS -->
+
+            <div class="form-options">
+
+
+                <label class="remember">
+
+                    <input
+                        type="checkbox"
+                        id="rememberMe">
+
+                    <span>
+                        Remember me
+                    </span>
+
+                </label>
+
+
+                <a href="#"
+                   id="forgotPassword">
+
+                    Forgot password?
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- MESSAGE -->
+
+            <div
+                id="loginMessage"
+                class="login-message"
+                aria-live="polite">
+            </div>
+
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="login-submit"
+                id="loginSubmit">
+
+                <span id="loginButtonText">
+                    Login
+                </span>
+
+                <i
+                    class="fa-solid fa-arrow-right"
+                    id="loginButtonIcon">
+                </i>
+
+            </button>
+
+
+
+            <!-- DIVIDER -->
+
+            <div class="divider">
+
+                <span>
+                    OR
+                </span>
+
+            </div>
+
+
+
+            <!-- REGISTER -->
+
+            <p class="signup-text">
+
+                Don't have an account?
+
+                <a href="register.html">
+                    Create Account
+                </a>
+
+            </p>
+
+
+        </form>
 
     </div>
 
-
-    <form class="login-form">
-
-        <div class="input-group">
-
-            <label for="email">Email Address</label>
-
-            <div class="input-box">
-
-                <i class="fa-regular fa-envelope"></i>
-
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Enter your email"
-                    required
-                >
-
-            </div>
-
-        </div>
-
-
-        <div class="input-group">
-
-            <label for="password">Password</label>
-
-            <div class="input-box">
-
-                <i class="fa-solid fa-lock"></i>
-
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Enter your password"
-                    required
-                >
-
-                <button type="button"
-                        class="password-toggle"
-                        onclick="togglePassword()"
-                        aria-label="Show password">
-
-                    <i class="fa-regular fa-eye"></i>
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="form-options">
-
-            <label class="remember">
-
-                <input type="checkbox">
-
-                <span>Remember me</span>
-
-            </label>
-
-            <a href="#">Forgot password?</a>
-
-        </div>
-
-
-        <button type="submit" class="login-submit">
-
-            Login
-
-            <i class="fa-solid fa-arrow-right"></i>
-
-        </button>
-
-
-        <div class="divider">
-            <span>OR</span>
-        </div>
-
-
-      <p class="signup-text">
-    Don't have an account?
-    <a href="register.html">Create Account</a>
-</p>
-
-    </form>
-
 </div>
-```
 
-</div>
+
 
 <script>
 
-function togglePassword() {
 
-    const password = document.getElementById("password");
-    const icon = document.querySelector(".password-toggle i");
+/* ==========================================
+   SUPABASE CONFIGURATION
+========================================== */
 
-    if (password.type === "password") {
+const SUPABASE_URL =
+    "https://ukksxlhopvemunyibusg.supabase.co";
 
-        password.type = "text";
+const SUPABASE_KEY =
+    "sb_publishable_0hFYgocoBicqr-nAMRuXYw_Zrecb0Qo";
 
-        icon.classList.remove("fa-eye");
-        icon.classList.add("fa-eye-slash");
 
-    } else {
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
-        password.type = "password";
 
-        icon.classList.remove("fa-eye-slash");
-        icon.classList.add("fa-eye");
+
+/* ==========================================
+   ELEMENTS
+========================================== */
+
+const loginForm =
+    document.getElementById("loginForm");
+
+const emailInput =
+    document.getElementById("email");
+
+const passwordInput =
+    document.getElementById("password");
+
+const passwordToggle =
+    document.getElementById("passwordToggle");
+
+const rememberMe =
+    document.getElementById("rememberMe");
+
+const loginSubmit =
+    document.getElementById("loginSubmit");
+
+const loginButtonText =
+    document.getElementById("loginButtonText");
+
+const loginButtonIcon =
+    document.getElementById("loginButtonIcon");
+
+const loginMessage =
+    document.getElementById("loginMessage");
+
+const forgotPassword =
+    document.getElementById("forgotPassword");
+
+
+
+/* ==========================================
+   REDIRECT HANDLING
+========================================== */
+
+function getRedirectPage() {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const redirect =
+        params.get("redirect");
+
+
+    const allowedPages = [
+
+        "index.html",
+        "matches.html",
+        "squad.html",
+        "store.html",
+        "about.html",
+        "account.html",
+        "booking.html"
+
+    ];
+
+
+    if (
+        redirect &&
+        allowedPages.includes(redirect)
+    ) {
+
+        return redirect;
+
+    }
+
+
+    return "index.html";
+
+}
+
+
+
+const redirectPage =
+    getRedirectPage();
+
+
+
+/* ==========================================
+   MESSAGE
+========================================== */
+
+function showMessage(
+    message,
+    type = "error"
+) {
+
+    loginMessage.textContent =
+        message;
+
+    loginMessage.className =
+        `login-message ${type}`;
+
+}
+
+
+
+function clearMessage() {
+
+    loginMessage.textContent =
+        "";
+
+    loginMessage.className =
+        "login-message";
+
+}
+
+
+
+/* ==========================================
+   PASSWORD TOGGLE
+========================================== */
+
+passwordToggle.addEventListener(
+    "click",
+    function() {
+
+        if (
+            passwordInput.type ===
+            "password"
+        ) {
+
+            passwordInput.type =
+                "text";
+
+
+            passwordToggle
+                .setAttribute(
+                    "aria-label",
+                    "Hide password"
+                );
+
+
+            passwordToggle
+                .querySelector("i")
+                .classList
+                .remove("fa-eye");
+
+
+            passwordToggle
+                .querySelector("i")
+                .classList
+                .add("fa-eye-slash");
+
+        } else {
+
+            passwordInput.type =
+                "password";
+
+
+            passwordToggle
+                .setAttribute(
+                    "aria-label",
+                    "Show password"
+                );
+
+
+            passwordToggle
+                .querySelector("i")
+                .classList
+                .remove("fa-eye-slash");
+
+
+            passwordToggle
+                .querySelector("i")
+                .classList
+                .add("fa-eye");
+
+        }
+
+    }
+);
+
+
+
+/* ==========================================
+   REMEMBER ME
+========================================== */
+
+const savedEmail =
+    localStorage.getItem(
+        "mi_saved_email"
+    );
+
+
+if (savedEmail) {
+
+    emailInput.value =
+        savedEmail;
+
+    rememberMe.checked =
+        true;
+
+}
+
+
+
+/* ==========================================
+   CHECK EXISTING SESSION
+========================================== */
+
+async function checkExistingSession() {
+
+    try {
+
+        const {
+            data: { session }
+        } =
+            await supabaseClient.auth.getSession();
+
+
+        if (session) {
+
+            window.location.href =
+                "account.html";
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Session Check Error:",
+            error
+        );
 
     }
 
 }
 
 
-const SUPABASE_URL = "https://ukksxlhopvemunyibusg.supabase.co";
-const SUPABASE_KEY = "sb_publishable_0hFYgocoBicqr-nAMRuXYw_Zrecb0Qo";
 
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
+checkExistingSession();
+
+
+
+/* ==========================================
+   LOGIN
+========================================== */
+
+loginForm.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        clearMessage();
+
+
+        const email =
+            emailInput.value
+                .trim()
+                .toLowerCase();
+
+
+        const password =
+            passwordInput.value;
+
+
+        if (!email) {
+
+            showMessage(
+                "Please enter your email address."
+            );
+
+            emailInput.focus();
+
+            return;
+
+        }
+
+
+        if (!password) {
+
+            showMessage(
+                "Please enter your password."
+            );
+
+            passwordInput.focus();
+
+            return;
+
+        }
+
+
+        if (rememberMe.checked) {
+
+            localStorage.setItem(
+                "mi_saved_email",
+                email
+            );
+
+        } else {
+
+            localStorage.removeItem(
+                "mi_saved_email"
+            );
+
+        }
+
+
+        loginSubmit.disabled =
+            true;
+
+
+        loginButtonText.textContent =
+            "Logging in...";
+
+
+        loginButtonIcon.className =
+            "fa-solid fa-spinner fa-spin";
+
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.auth
+                    .signInWithPassword({
+
+                        email: email,
+
+                        password: password
+
+                    });
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            if (
+                !data ||
+                !data.user
+            ) {
+
+                throw new Error(
+                    "Login failed. Please try again."
+                );
+
+            }
+
+
+            showMessage(
+                "Login successful. Redirecting...",
+                "success"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        redirectPage;
+
+                },
+                700
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Login Error:",
+                error
+            );
+
+
+            let message =
+                "Unable to login. Please try again.";
+
+
+            if (
+                error.message
+                    .toLowerCase()
+                    .includes(
+                        "invalid login credentials"
+                    )
+            ) {
+
+                message =
+                    "Incorrect email or password.";
+
+            } else if (
+                error.message
+                    .toLowerCase()
+                    .includes(
+                        "email not confirmed"
+                    )
+            ) {
+
+                message =
+                    "Please confirm your email before logging in.";
+
+            } else if (
+                error.message
+            ) {
+
+                message =
+                    error.message;
+
+            }
+
+
+            showMessage(
+                message,
+                "error"
+            );
+
+
+            loginSubmit.disabled =
+                false;
+
+
+            loginButtonText.textContent =
+                "Login";
+
+
+            loginButtonIcon.className =
+                "fa-solid fa-arrow-right";
+
+        }
+
+    }
 );
 
 
-document.querySelector(".login-form").addEventListener("submit", async function(event) {
 
-    event.preventDefault();
+/* ==========================================
+   FORGOT PASSWORD
+========================================== */
 
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
+forgotPassword.addEventListener(
+    "click",
+    async function(event) {
 
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
-    });
+        event.preventDefault();
 
-    if (error) {
-        alert(error.message);
-        return;
+
+        clearMessage();
+
+
+        const email =
+            emailInput.value
+                .trim()
+                .toLowerCase();
+
+
+        if (!email) {
+
+            showMessage(
+                "Enter your email address first, then click Forgot password."
+            );
+
+            emailInput.focus();
+
+            return;
+
+        }
+
+
+        try {
+
+            const {
+                error
+            } =
+                await supabaseClient.auth
+                    .resetPasswordForEmail(
+                        email,
+                        {
+                            redirectTo:
+                                `${window.location.origin}/login.html`
+                        }
+                    );
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            showMessage(
+                "Password reset instructions have been sent to your email.",
+                "success"
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Password Reset Error:",
+                error
+            );
+
+
+            showMessage(
+                error.message ||
+                "Unable to send password reset email."
+            );
+
+        }
+
     }
+);
 
-    if (!data.user) {
-        alert("Login failed. Please try again.");
-        return;
-    }
-
-    alert("Login successful!");
-
-    window.location.href = "index.html";
-
-});
 
 </script>
+
+
 </body>
 </html>
+```
