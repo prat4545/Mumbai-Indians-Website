@@ -514,5 +514,61 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://ukksxlhopvemunyibusg.supabase.co";
+const SUPABASE_KEY = "sb_publishable_0hFYgocoBicqr-nAMRuXYw_Zrecb0Qo";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+async function loadUserProfile() {
+
+    const { data, error } = await supabaseClient.auth.getUser();
+
+    if (error || !data.user) {
+
+        window.location.href = "login.html";
+        return;
+
+    }
+
+    const user = data.user;
+
+
+    const { data: profile, error: profileError } =
+        await supabaseClient
+            .from("profiles")
+            .select("*")
+            .eq("id", user.id)
+            .single();
+
+
+    const profileName =
+        profile?.full_name ||
+        user.user_metadata?.full_name ||
+        "Mumbai Indians Fan";
+
+
+    const profileEmail =
+        profile?.email ||
+        user.email;
+
+
+    document.querySelector(".profile-details h2").textContent =
+        profileName;
+
+    document.querySelector(".profile-details > p:not(.profile-label)")
+        .textContent = profileEmail;
+
+}
+
+
+loadUserProfile();
+</script>
 </body>
 </html>
