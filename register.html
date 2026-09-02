@@ -1,519 +1,85 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-```
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Create your Mumbai Indians fan account">
-
 <title>Register | Mumbai Indians</title>
-
 <link rel="stylesheet" href="css/register.css">
-
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-```
-
+<script src="js/auth.js"></script>
 </head>
-
 <body>
-
 <div class="login-page">
-
-```
 <div class="login-decoration decoration-one"></div>
 <div class="login-decoration decoration-two"></div>
-
 <div class="login-container">
-
-    <div class="login-brand">
-
-        <a href="index.html" class="back-home">
-            <i class="fa-solid fa-arrow-left"></i>
-            Back to Home
-        </a>
-
-        <div class="login-logo">
-            <img src="images/logo.png" alt="Mumbai Indians Logo">
-        </div>
-
-        <p class="brand-tag">#ONEFAMILY</p>
-
-        <h1>Create Account</h1>
-
-        <p>
-            Join the Mumbai Indians One Family.
-        </p>
-
-    </div>
-
-
-    <form class="login-form" id="registerForm">
-
-        <div class="input-group">
-
-            <label for="name">Full Name</label>
-
-            <div class="input-box">
-
-                <i class="fa-regular fa-user"></i>
-
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Enter your full name"
-                    autocomplete="name"
-                    minlength="2"
-                    required
-                >
-
-            </div>
-
-        </div>
-
-
-        <div class="input-group">
-
-            <label for="email">Email Address</label>
-
-            <div class="input-box">
-
-                <i class="fa-regular fa-envelope"></i>
-
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Enter your email"
-                    autocomplete="email"
-                    required
-                >
-
-            </div>
-
-        </div>
-
-
-        <div class="input-group">
-
-            <label for="mobile">Mobile Number</label>
-
-            <div class="input-box">
-
-                <i class="fa-solid fa-phone"></i>
-
-                <input
-                    type="tel"
-                    id="mobile"
-                    name="mobile"
-                    placeholder="Enter your mobile number"
-                    pattern="[0-9]{10}"
-                    maxlength="10"
-                    minlength="10"
-                    inputmode="numeric"
-                    autocomplete="tel"
-                    required
-                >
-
-            </div>
-
-        </div>
-
-
-        <div class="input-group">
-
-            <label for="password">Password</label>
-
-            <div class="input-box">
-
-                <i class="fa-solid fa-lock"></i>
-
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Create a password"
-                    minlength="6"
-                    autocomplete="new-password"
-                    required
-                >
-
-                <button
-                    type="button"
-                    class="password-toggle"
-                    onclick="togglePassword('password', this)"
-                    aria-label="Show password">
-
-                    <i class="fa-regular fa-eye"></i>
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="input-group">
-
-            <label for="confirmPassword">Confirm Password</label>
-
-            <div class="input-box">
-
-                <i class="fa-solid fa-lock"></i>
-
-                <input
-                    type="password"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    placeholder="Confirm your password"
-                    minlength="6"
-                    autocomplete="new-password"
-                    required
-                >
-
-                <button
-                    type="button"
-                    class="password-toggle"
-                    onclick="togglePassword('confirmPassword', this)"
-                    aria-label="Show password">
-
-                    <i class="fa-regular fa-eye"></i>
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <label class="remember register-terms">
-
-            <input type="checkbox" id="terms" required>
-
-            <span>
-                I agree to the Terms & Conditions
-            </span>
-
-        </label>
-
-
-        <div id="registerMessage"
-             role="alert"
-             aria-live="polite"
-             style="display:none;">
-        </div>
-
-
-        <button type="submit"
-                class="login-submit"
-                id="registerButton">
-
-            <span id="registerButtonText">
-                Create Account
-            </span>
-
-            <i class="fa-solid fa-arrow-right" id="registerButtonIcon"></i>
-
-        </button>
-
-
-        <div class="divider">
-            <span>OR</span>
-        </div>
-
-
-        <p class="signup-text">
-
-            Already have an account?
-
-            <a href="login.html">
-                Login
-            </a>
-
-        </p>
-
-    </form>
-
+<div class="login-brand">
+<a href="index.html" class="back-home"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+<div class="login-logo"><img src="images/logo.png" alt="Mumbai Indians Logo"></div>
+<p class="brand-tag">#ONEFAMILY</p>
+<h1>Create Account</h1>
+<p>Join the Mumbai Indians One Family.</p>
 </div>
-```
-
+<form class="login-form" id="registerForm">
+<div class="input-group"><label for="name">Full Name</label><div class="input-box"><i class="fa-regular fa-user"></i><input type="text" id="name" name="name" placeholder="Enter your full name" autocomplete="name" minlength="2" required></div></div>
+<div class="input-group"><label for="email">Email Address</label><div class="input-box"><i class="fa-regular fa-envelope"></i><input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="email" required></div></div>
+<div class="input-group"><label for="mobile">Mobile Number</label><div class="input-box"><i class="fa-solid fa-phone"></i><input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number" pattern="[0-9]{10}" maxlength="10" minlength="10" inputmode="numeric" autocomplete="tel" required></div></div>
+<div class="input-group"><label for="password">Password</label><div class="input-box"><i class="fa-solid fa-lock"></i><input type="password" id="password" name="password" placeholder="Create a password" minlength="6" autocomplete="new-password" required><button type="button" class="password-toggle" id="passwordToggle" aria-label="Show password"><i class="fa-regular fa-eye"></i></button></div></div>
+<div class="input-group"><label for="confirmPassword">Confirm Password</label><div class="input-box"><i class="fa-solid fa-lock"></i><input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" minlength="6" autocomplete="new-password" required><button type="button" class="password-toggle" id="confirmPasswordToggle" aria-label="Show password"><i class="fa-regular fa-eye"></i></button></div></div>
+<label class="remember register-terms"><input type="checkbox" id="terms" required><span>I agree to the Terms &amp; Conditions</span></label>
+<div id="registerMessage" role="alert" aria-live="polite" style="display:none;"></div>
+<button type="submit" class="login-submit" id="registerButton"><span id="registerButtonText">Create Account</span><i class="fa-solid fa-arrow-right" id="registerButtonIcon"></i></button>
+<div class="divider"><span>OR</span></div>
+<p class="signup-text">Already have an account? <a href="login.html">Login</a></p>
+</form>
 </div>
-
+</div>
 <script>
-
-const SUPABASE_URL = "https://ukksxlhopvemunyibusg.supabase.co";
-
-const SUPABASE_KEY =
-    "sb_publishable_0hFYgocoBicqr-nAMRuXYw_Zrecb0Qo";
-
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-
-
-const registerForm = document.getElementById("registerForm");
-const registerButton = document.getElementById("registerButton");
-const registerButtonText = document.getElementById("registerButtonText");
-const registerButtonIcon = document.getElementById("registerButtonIcon");
-const registerMessage = document.getElementById("registerMessage");
-
-
-function togglePassword(id, button) {
-
-    const passwordInput = document.getElementById(id);
-    const icon = button.querySelector("i");
-
-    if (passwordInput.type === "password") {
-
-        passwordInput.type = "text";
-
-        icon.classList.remove("fa-eye");
-        icon.classList.add("fa-eye-slash");
-
-        button.setAttribute("aria-label", "Hide password");
-
-    } else {
-
-        passwordInput.type = "password";
-
-        icon.classList.remove("fa-eye-slash");
-        icon.classList.add("fa-eye");
-
-        button.setAttribute("aria-label", "Show password");
-    }
-}
-
-
-function showMessage(message, type = "error") {
-
-    registerMessage.textContent = message;
-
-    registerMessage.style.display = "block";
-
-    registerMessage.style.padding = "12px 14px";
-    registerMessage.style.marginBottom = "16px";
-    registerMessage.style.borderRadius = "8px";
-    registerMessage.style.fontSize = "14px";
-
-    if (type === "success") {
-
-        registerMessage.style.background = "#e8f7ee";
-        registerMessage.style.color = "#18733a";
-
-    } else {
-
-        registerMessage.style.background = "#fff0f0";
-        registerMessage.style.color = "#c62828";
-    }
-}
-
-
-function hideMessage() {
-
-    registerMessage.style.display = "none";
-    registerMessage.textContent = "";
-}
-
-
-function setLoading(isLoading) {
-
-    registerButton.disabled = isLoading;
-
-    if (isLoading) {
-
-        registerButtonText.textContent = "Creating Account...";
-        registerButtonIcon.className = "fa-solid fa-spinner fa-spin";
-
-    } else {
-
-        registerButtonText.textContent = "Create Account";
-        registerButtonIcon.className = "fa-solid fa-arrow-right";
-    }
-}
-
-
-registerForm.addEventListener("submit", async function(event) {
-
-    event.preventDefault();
-
-    hideMessage();
-
-    const name =
-        document.getElementById("name").value.trim();
-
-    const email =
-        document.getElementById("email").value.trim().toLowerCase();
-
-    const mobile =
-        document.getElementById("mobile").value.trim();
-
-    const password =
-        document.getElementById("password").value;
-
-    const confirmPassword =
-        document.getElementById("confirmPassword").value;
-
-    const terms =
-        document.getElementById("terms").checked;
-
-
-    if (name.length < 2) {
-
-        showMessage("Please enter your full name.");
-        return;
-    }
-
-
-    if (!/^[0-9]{10}$/.test(mobile)) {
-
-        showMessage("Please enter a valid 10-digit mobile number.");
-        return;
-    }
-
-
-    if (password.length < 6) {
-
-        showMessage("Password must be at least 6 characters long.");
-        return;
-    }
-
-
-    if (password !== confirmPassword) {
-
-        showMessage("Passwords do not match.");
-        return;
-    }
-
-
-    if (!terms) {
-
-        showMessage("Please accept the Terms & Conditions.");
-        return;
-    }
-
-
-    setLoading(true);
-
-
-    try {
-
-        const { data, error } =
-            await supabaseClient.auth.signUp({
-
-                email: email,
-
-                password: password,
-
-                options: {
-
-                    data: {
-                        full_name: name,
-                        mobile: mobile
-                    }
-
-                }
-
-            });
-
-
-        if (error) {
-            throw error;
-        }
-
-
-        if (!data || !data.user) {
-
-            throw new Error(
-                "Registration could not be completed. Please try again."
-            );
-        }
-
-
-        /*
-         * Supabase profile information is passed through
-         * user metadata above.
-         *
-         * This works with the existing profile setup and
-         * avoids creating duplicate profile rows.
-         */
-
-
-        if (!data.session) {
-
-            showMessage(
-                "Account created successfully! Please check your email to verify your account, then login.",
-                "success"
-            );
-
-            registerForm.reset();
-
-            setLoading(false);
-
-            setTimeout(function() {
-
-                window.location.href = "login.html";
-
-            }, 2500);
-
-            return;
-        }
-
-
-        showMessage(
-            "Account created successfully! Redirecting to login...",
-            "success"
-        );
-
-
-        setTimeout(function() {
-
-            window.location.href = "login.html";
-
-        }, 1500);
-
-
-    } catch (error) {
-
-        console.error("Registration Error:", error);
-
-        let message =
-            error.message || "Registration failed. Please try again.";
-
-
-        if (
-            message.toLowerCase().includes("already registered") ||
-            message.toLowerCase().includes("user already registered")
-        ) {
-
-            message =
-                "An account with this email already exists. Please login instead.";
-        }
-
-
-        if (
-            message.toLowerCase().includes("password should be")
-        ) {
-
-            message =
-                "Password must be at least 6 characters long.";
-        }
-
-
-        showMessage(message);
-
-        setLoading(false);
-    }
-
+const client = window.MIAuth.client;
+const registerForm=document.getElementById("registerForm");
+const registerButton=document.getElementById("registerButton");
+const registerButtonText=document.getElementById("registerButtonText");
+const registerButtonIcon=document.getElementById("registerButtonIcon");
+const registerMessage=document.getElementById("registerMessage");
+
+function togglePassword(id,button){const input=document.getElementById(id);const icon=button.querySelector("i");const visible=input.type==="text";input.type=visible?"password":"text";icon.className=visible?"fa-regular fa-eye":"fa-regular fa-eye-slash";button.setAttribute("aria-label",visible?"Show password":"Hide password");}
+document.getElementById("passwordToggle").addEventListener("click",()=>togglePassword("password",document.getElementById("passwordToggle")));
+document.getElementById("confirmPasswordToggle").addEventListener("click",()=>togglePassword("confirmPassword",document.getElementById("confirmPasswordToggle")));
+
+function showMessage(message,type="error"){registerMessage.textContent=message;registerMessage.style.display="block";registerMessage.style.padding="12px 14px";registerMessage.style.marginBottom="16px";registerMessage.style.borderRadius="8px";registerMessage.style.fontSize="14px";if(type==="success"){registerMessage.style.background="#e8f7ee";registerMessage.style.color="#18733a";}else{registerMessage.style.background="#fff0f0";registerMessage.style.color="#c62828";}}
+function hideMessage(){registerMessage.style.display="none";registerMessage.textContent="";}
+function setLoading(isLoading){registerButton.disabled=isLoading;if(isLoading){registerButtonText.textContent="Creating Account...";registerButtonIcon.className="fa-solid fa-spinner fa-spin";}else{registerButtonText.textContent="Create Account";registerButtonIcon.className="fa-solid fa-arrow-right";}}
+
+registerForm.addEventListener("submit",async event=>{
+ event.preventDefault();hideMessage();
+ const name=document.getElementById("name").value.trim();
+ const email=document.getElementById("email").value.trim().toLowerCase();
+ const mobile=document.getElementById("mobile").value.trim();
+ const password=document.getElementById("password").value;
+ const confirmPassword=document.getElementById("confirmPassword").value;
+ const terms=document.getElementById("terms").checked;
+ if(name.length<2){showMessage("Please enter your full name.");return;}
+ if(!/^[0-9]{10}$/.test(mobile)){showMessage("Please enter a valid 10-digit mobile number.");return;}
+ if(password.length<6){showMessage("Password must be at least 6 characters long.");return;}
+ if(password!==confirmPassword){showMessage("Passwords do not match.");return;}
+ if(!terms){showMessage("Please accept the Terms & Conditions.");return;}
+ setLoading(true);
+ try{
+  const {data,error}=await client.auth.signUp({email,password,options:{data:{full_name:name,mobile:mobile}}});
+  if(error)throw error;
+  if(!data?.user)throw new Error("Registration could not be completed. Please try again.");
+  if(!data.session){showMessage("Account created successfully! Please check your email to verify your account, then login.","success");registerForm.reset();setLoading(false);setTimeout(()=>window.location.href="login.html",2500);return;}
+  showMessage("Account created successfully! Redirecting to login...","success");
+  setTimeout(()=>window.location.href="login.html",1500);
+ }catch(error){
+  console.error("Registration Error:",error);let message=error.message||"Registration failed. Please try again.";const text=message.toLowerCase();
+  if(text.includes("already registered")||text.includes("user already registered"))message="An account with this email already exists. Please login instead.";
+  else if(text.includes("password should be"))message="Password must be at least 6 characters long.";
+  showMessage(message);setLoading(false);
+ }
 });
-
 </script>
-
 </body>
 </html>
