@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const params = new URLSearchParams(window.location.search);
     const matchId = params.get("match_id");
     const $ = id => document.getElementById(id);
-
     const safe = value => String(value ?? "").replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#039;","\"":"&quot;"}[c]));
     const shortName = value => String(value || "TBA").split(/\s+/).map(x => x[0]).join("").slice(0,4).toUpperCase();
 
@@ -18,21 +17,16 @@ document.addEventListener("DOMContentLoaded", async () => {
             client.from("matches").select("id,opponent,match_date,match_time,venue,city,status,ticket_status").eq("id", matchId).single(),
             client.from("tickets").select("category,price,total_seats,available_seats").eq("match_id", Number(matchId)).order("price", { ascending: true })
         ]);
-
         if (matchError || !match) throw new Error("Match details are unavailable.");
 
-        $("title").textContent = `${match.opponent || "Opponent"} Match | Mumbai Indians`;
-        $("title").textContent = `vs ${match.opponent || "Opponent"} | Mumbai Indians`;
+        document.title = `${match.opponent || "Opponent"} Match | Mumbai Indians`;
         $("opponent").textContent = match.opponent || "Opponent";
         $("opponentShort").textContent = shortName(match.opponent);
         $("date").textContent = match.match_date ? new Date(`${match.match_date}T00:00:00`).toLocaleDateString("en-IN", {day:"2-digit",month:"short",year:"numeric"}) : "Date TBA";
         $("time").textContent = match.match_time ? String(match.match_time).slice(0,5) : "Time TBA";
         $("venue").textContent = match.venue || "Venue TBA";
         $("city").textContent = match.city || "City TBA";
-        $("title").textContent = `Match Details | Mumbai Indians`;
-
-        const statusText = match.status || "UPCOMING";
-        $("status").textContent = String(statusText).toUpperCase();
+        $("status").textContent = String(match.status || "UPCOMING").toUpperCase();
 
         const ticketContainer = $("tickets");
         if (ticketError) {
