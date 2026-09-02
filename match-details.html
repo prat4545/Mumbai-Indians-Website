@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mumbai Indians match details, ticket availability and venue information">
+<title>Match Details | Mumbai Indians</title>
+<link rel="stylesheet" href="css/match-details.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/auth.js"></script>
+</head>
+<body>
+<header class="navbar"><a href="index.html" class="logo"><img src="images/logo.png" alt="Mumbai Indians Logo"></a><div class="brand"><span>MUMBAI INDIANS</span><small>#OneFamily</small></div><nav id="mainNav"><a href="index.html">Home</a><a href="matches.html">Matches</a><a href="squad.html">Squad</a><a href="booking.html">Tickets</a><a href="index.html#trophies">Trophies</a><a href="about.html">About</a><a href="store.html">Store</a><a href="login.html" class="login-btn">Login</a></nav></header>
+<main>
+<section class="details-hero"><a href="matches.html"><i class="fa-solid fa-arrow-left"></i> Back to Matches</a><p class="section-tag">MUMBAI INDIANS • MATCH CENTRE</p><h1 id="title">Match Details</h1><p id="status" class="status">Loading match information...</p></section>
+<section class="details-wrap"><div class="details-card"><div class="teams"><div class="team"><img src="images/logo.png" alt="Mumbai Indians"><h2>MUMBAI INDIANS</h2><span>MI</span></div><div class="vs">VS</div><div class="team"><div class="opponent-icon"><i class="fa-solid fa-shield-halved"></i></div><h2 id="opponent">OPPONENT</h2><span id="opponentShort">TBA</span></div></div><div class="info-grid"><div><i class="fa-regular fa-calendar"></i><span><small>Date</small><strong id="date">TBA</strong></span></div><div><i class="fa-regular fa-clock"></i><span><small>Time</small><strong id="time">TBA</strong></span></div><div><i class="fa-solid fa-location-dot"></i><span><small>Venue</small><strong id="venue">TBA</strong></span></div><div><i class="fa-solid fa-city"></i><span><small>City</small><strong id="city">TBA</strong></span></div></div><div id="ticketBox" class="ticket-box"><h3>Ticket Availability</h3><div id="tickets">Checking ticket availability...</div></div><div class="actions"><a id="bookingLink" class="primary-btn" href="booking.html"><i class="fa-solid fa-ticket"></i> Book Tickets</a><a class="secondary-btn" href="matches.html">Back to Fixtures</a></div><div id="message" class="message" role="status"></div></div></section>
+</main>
+<footer><p>© 2026 Mumbai Indians Fan Website • Designed by PRATIK</p></footer>
+<script src="js/match-details.js"></script>
+</body>
+</html>
