@@ -1,1509 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="description" content="Mumbai Indians fan account">
-
     <title>My Account | Mumbai Indians</title>
-
     <link rel="stylesheet" href="css_style.css">
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <!-- Supabase -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+    <script src="js/auth.js"></script>
 </head>
-
-
 <body>
-
-
-<!-- ================= NAVBAR ================= -->
-
 <header class="navbar">
-
-    <a href="index.html" class="logo">
-        <img src="images/logo.png" alt="Mumbai Indians Logo">
-    </a>
-
-    <div class="brand">
-        <span>MUMBAI INDIANS</span>
-        <small>#OneFamily</small>
-    </div>
-
+    <a href="index.html" class="logo"><img src="images/logo.png" alt="Mumbai Indians Logo"></a>
+    <div class="brand"><span>MUMBAI INDIANS</span><small>#OneFamily</small></div>
     <nav>
-
         <a href="index.html">Home</a>
-
         <a href="matches.html">Matches</a>
-
         <a href="about.html">About</a>
-
         <a href="store.html">Store</a>
-
-        <a href="account.html" class="active">
-            My Account
-        </a>
-
-        <a href="#" class="login-btn" id="logoutBtn">
-            Logout
-        </a>
-
+        <a href="account.html" class="active">My Account</a>
+        <a href="login.html" class="login-btn" id="logoutBtn">Logout</a>
     </nav>
-
 </header>
 
-
-
 <main>
-
-
-<!-- ================= ACCOUNT HERO ================= -->
-
 <section class="account-hero">
-
     <div class="account-hero-content">
-
-        <p class="section-tag">
-            MUMBAI INDIANS • ONE FAMILY
-        </p>
-
-        <h1>
-            My <span>Account</span>
-        </h1>
-
-        <p>
-            Manage your profile, tickets, orders and Mumbai Indians
-            activities from one place.
-        </p>
-
+        <p class="section-tag">MUMBAI INDIANS • ONE FAMILY</p>
+        <h1>My <span>Account</span></h1>
+        <p>Manage your profile, tickets, orders and Mumbai Indians activities from one place.</p>
     </div>
-
 </section>
-
-
-
-<!-- ================= ACCOUNT SECTION ================= -->
 
 <section class="account-section">
-
-
-    <!-- ================= PROFILE ================= -->
-
     <div class="account-profile-card">
-
-        <div class="profile-avatar">
-            <i class="fa-solid fa-user"></i>
-        </div>
-
-
+        <div class="profile-avatar"><i class="fa-solid fa-user"></i></div>
         <div class="profile-details">
-
-            <p class="profile-label">
-                WELCOME BACK
-            </p>
-
-            <h2 id="profileDisplayName">
-                Loading...
-            </h2>
-
-            <p id="profileDisplayEmail">
-                Loading...
-            </p>
-
-            <span class="member-badge">
-
-                <i class="fa-solid fa-star"></i>
-
-                ONE FAMILY MEMBER
-
-            </span>
-
+            <p class="profile-label">WELCOME BACK</p>
+            <h2 id="profileDisplayName">Loading...</h2>
+            <p id="profileDisplayEmail">Loading...</p>
+            <span class="member-badge"><i class="fa-solid fa-star"></i> ONE FAMILY MEMBER</span>
         </div>
-
-
-        <a href="#" class="edit-profile" id="editProfileBtn">
-
-            <i class="fa-solid fa-pen"></i>
-
-            Edit Profile
-
-        </a>
-
+        <a href="#" class="edit-profile" id="editProfileBtn"><i class="fa-solid fa-pen"></i> Edit Profile</a>
     </div>
-
-
-
-    <!-- ================= ACCOUNT STATS ================= -->
 
     <div class="account-stats">
-
-
-        <!-- TICKETS -->
-
-        <div class="account-stat">
-
-            <i class="fa-solid fa-ticket"></i>
-
-            <div>
-
-                <strong id="ticketCount">
-                    0
-                </strong>
-
-                <span>
-                    Tickets
-                </span>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- ORDERS -->
-
-        <div class="account-stat">
-
-            <i class="fa-solid fa-bag-shopping"></i>
-
-            <div>
-
-                <strong id="orderCount">
-                    0
-                </strong>
-
-                <span>
-                    Orders
-                </span>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- BOOKINGS -->
-
-        <div class="account-stat">
-
-            <i class="fa-solid fa-calendar-check"></i>
-
-            <div>
-
-                <strong id="bookingCount">
-                    0
-                </strong>
-
-                <span>
-                    Bookings
-                </span>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- FAN -->
-
-        <div class="account-stat">
-
-            <i class="fa-solid fa-heart"></i>
-
-            <div>
-
-                <strong>
-                    MI
-                </strong>
-
-                <span>
-                    Fan
-                </span>
-
-            </div>
-
-        </div>
-
+        <div class="account-stat"><i class="fa-solid fa-ticket"></i><div><strong id="ticketCount">0</strong><span>Tickets</span></div></div>
+        <div class="account-stat"><i class="fa-solid fa-bag-shopping"></i><div><strong id="orderCount">0</strong><span>Orders</span></div></div>
+        <div class="account-stat"><i class="fa-solid fa-calendar-check"></i><div><strong id="bookingCount">0</strong><span>Bookings</span></div></div>
+        <div class="account-stat"><i class="fa-solid fa-heart"></i><div><strong>MI</strong><span>Fan</span></div></div>
     </div>
-
-
-
-    <!-- ================= ACCOUNT GRID ================= -->
 
     <div class="account-grid">
-
-
-        <!-- MY TICKETS -->
-
         <div class="account-card">
-
-            <div class="account-card-icon">
-
-                <i class="fa-solid fa-ticket"></i>
-
-            </div>
-
-
-            <div>
-
-                <p class="card-small-title">
-                    MATCH DAY
-                </p>
-
-                <h3>
-                    My Tickets
-                </h3>
-
-                <p>
-                    View your upcoming and previous
-                    Mumbai Indians match tickets.
-                </p>
-
-                <a href="matches.html" class="account-action">
-
-                    View Tickets
-
-                    <i class="fa-solid fa-arrow-right"></i>
-
-                </a>
-
-            </div>
-
+            <div class="account-card-icon"><i class="fa-solid fa-ticket"></i></div>
+            <div><p class="card-small-title">MATCH DAY</p><h3>My Tickets</h3><p>View your upcoming and previous Mumbai Indians match tickets.</p><a href="matches.html" class="account-action">View Tickets <i class="fa-solid fa-arrow-right"></i></a></div>
         </div>
-
-
-
-        <!-- MY ORDERS -->
-
         <div class="account-card">
-
-            <div class="account-card-icon">
-
-                <i class="fa-solid fa-box"></i>
-
-            </div>
-
-
-            <div>
-
-                <p class="card-small-title">
-                    MI STORE
-                </p>
-
-                <h3>
-                    My Orders
-                </h3>
-
-                <p>
-                    Track merchandise orders and
-                    view your purchase history.
-                </p>
-
-                <a href="store.html" class="account-action">
-
-                    View Orders
-
-                    <i class="fa-solid fa-arrow-right"></i>
-
-                </a>
-
-            </div>
-
+            <div class="account-card-icon"><i class="fa-solid fa-box"></i></div>
+            <div><p class="card-small-title">MI STORE</p><h3>My Orders</h3><p>Track merchandise orders and view your purchase history.</p><a href="store.html" class="account-action">View Orders <i class="fa-solid fa-arrow-right"></i></a></div>
         </div>
-
-
-
-        <!-- PROFILE SETTINGS -->
-
         <div class="account-card">
-
-            <div class="account-card-icon">
-
-                <i class="fa-solid fa-user-gear"></i>
-
-            </div>
-
-
-            <div>
-
-                <p class="card-small-title">
-                    ACCOUNT
-                </p>
-
-                <h3>
-                    Profile Settings
-                </h3>
-
-                <p>
-                    Update your personal information
-                    and account preferences.
-                </p>
-
-                <a href="#"
-                   class="account-action"
-                   id="manageProfileBtn">
-
-                    Manage Profile
-
-                    <i class="fa-solid fa-arrow-right"></i>
-
-                </a>
-
-            </div>
-
+            <div class="account-card-icon"><i class="fa-solid fa-user-gear"></i></div>
+            <div><p class="card-small-title">ACCOUNT</p><h3>Profile Settings</h3><p>Update your personal information and account preferences.</p><a href="#" class="account-action" id="manageProfileBtn">Manage Profile <i class="fa-solid fa-arrow-right"></i></a></div>
         </div>
-
-
-
-        <!-- SECURITY -->
-
         <div class="account-card">
-
-            <div class="account-card-icon">
-
-                <i class="fa-solid fa-shield-halved"></i>
-
-            </div>
-
-
-            <div>
-
-                <p class="card-small-title">
-                    SECURITY
-                </p>
-
-                <h3>
-                    Account Security
-                </h3>
-
-                <p>
-                    Keep your account protected and
-                    manage your login credentials.
-                </p>
-
-                <a href="#" class="account-action">
-
-                    Security Settings
-
-                    <i class="fa-solid fa-arrow-right"></i>
-
-                </a>
-
-            </div>
-
+            <div class="account-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div><p class="card-small-title">SECURITY</p><h3>Account Security</h3><p>Keep your account protected and manage your login credentials.</p><a href="login.html" class="account-action">Security Settings <i class="fa-solid fa-arrow-right"></i></a></div>
         </div>
-
     </div>
-
-
-
-    <!-- ================= RECENT ACTIVITY ================= -->
 
     <div class="activity-section">
-
-
-        <div class="page-section-heading">
-
-            <p class="section-tag">
-                ACCOUNT ACTIVITY
-            </p>
-
-            <h2>
-                Recent <span>Activity</span>
-            </h2>
-
-        </div>
-
-
+        <div class="page-section-heading"><p class="section-tag">ACCOUNT ACTIVITY</p><h2>Recent <span>Activity</span></h2></div>
         <div class="empty-activity" id="activityContainer">
-
-            <i class="fa-solid fa-spinner fa-spin"></i>
-
-            <h3>
-                Loading activity...
-            </h3>
-
-            <p>
-                Please wait while we load your account activity.
-            </p>
-
+            <i class="fa-solid fa-spinner fa-spin"></i><h3>Loading activity...</h3><p>Please wait while we load your account activity.</p>
         </div>
-
     </div>
-
-
 </section>
 
-
-
-<!-- ================= EDIT PROFILE MODAL ================= -->
-
 <div class="profile-modal" id="profileModal">
-
-
     <div class="profile-modal-content">
-
-
-        <button class="close-modal"
-                id="closeProfileModal"
-                type="button">
-
-            <i class="fa-solid fa-xmark"></i>
-
-        </button>
-
-
-        <p class="section-tag">
-            ACCOUNT SETTINGS
-        </p>
-
-
-        <h2>
-            Edit <span>Profile</span>
-        </h2>
-
-
-
+        <button class="close-modal" id="closeProfileModal" type="button" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+        <p class="section-tag">ACCOUNT SETTINGS</p>
+        <h2>Edit <span>Profile</span></h2>
         <form id="profileForm">
-
-
-            <!-- NAME -->
-
-            <div class="input-group">
-
-                <label for="profileName">
-                    Full Name
-                </label>
-
-                <div class="input-box">
-
-                    <i class="fa-regular fa-user"></i>
-
-                    <input
-                        type="text"
-                        id="profileName"
-                        required
-                    >
-
-                </div>
-
-            </div>
-
-
-
-            <!-- EMAIL -->
-
-            <div class="input-group">
-
-                <label for="profileEmail">
-                    Email Address
-                </label>
-
-                <div class="input-box">
-
-                    <i class="fa-regular fa-envelope"></i>
-
-                    <input
-                        type="email"
-                        id="profileEmail"
-                        disabled
-                    >
-
-                </div>
-
-            </div>
-
-
-
-            <!-- MOBILE -->
-
-            <div class="input-group">
-
-                <label for="profileMobile">
-                    Mobile Number
-                </label>
-
-                <div class="input-box">
-
-                    <i class="fa-solid fa-phone"></i>
-
-                    <input
-                        type="tel"
-                        id="profileMobile"
-                        maxlength="10"
-                        pattern="[0-9]{10}"
-                    >
-
-                </div>
-
-            </div>
-
-
-
-            <button type="submit"
-                    class="login-submit">
-
-                Save Changes
-
-                <i class="fa-solid fa-check"></i>
-
-            </button>
-
-
+            <div class="input-group"><label for="profileName">Full Name</label><div class="input-box"><i class="fa-regular fa-user"></i><input type="text" id="profileName" required></div></div>
+            <div class="input-group"><label for="profileEmail">Email Address</label><div class="input-box"><i class="fa-regular fa-envelope"></i><input type="email" id="profileEmail" disabled></div></div>
+            <div class="input-group"><label for="profileMobile">Mobile Number</label><div class="input-box"><i class="fa-solid fa-phone"></i><input type="tel" id="profileMobile" maxlength="10" pattern="[0-9]{10}"></div></div>
+            <button type="submit" class="login-submit">Save Changes <i class="fa-solid fa-check"></i></button>
         </form>
-
-
     </div>
-
 </div>
-
-
 </main>
 
-
-
-<!-- ================= FOOTER ================= -->
-
 <footer>
-
-
     <div class="footer-content">
-
-
-        <!-- BRAND -->
-
-        <div class="footer-brand">
-
-            <img src="images/logo.png"
-                 alt="Mumbai Indians">
-
-            <h3>
-                MUMBAI INDIANS
-            </h3>
-
-            <p>
-                #OneFamily
-            </p>
-
-        </div>
-
-
-
-        <!-- EXPLORE -->
-
-        <div class="footer-links">
-
-            <h4>
-                EXPLORE
-            </h4>
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="matches.html">
-                Matches
-            </a>
-
-            <a href="about.html">
-                About
-            </a>
-
-            <a href="store.html">
-                Store
-            </a>
-
-        </div>
-
-
-
-        <!-- ACCOUNT -->
-
-        <div class="footer-links">
-
-            <h4>
-                ACCOUNT
-            </h4>
-
-            <a href="account.html">
-                My Account
-            </a>
-
-            <a href="matches.html">
-                My Tickets
-            </a>
-
-            <a href="store.html">
-                My Orders
-            </a>
-
-        </div>
-
-
-
-        <!-- SOCIAL -->
-
-        <div class="footer-social">
-
-            <h4>
-                FOLLOW THE FAMILY
-            </h4>
-
-            <div>
-
-                <a href="#" aria-label="Facebook">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </a>
-
-                <a href="#" aria-label="Instagram">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-
-                <a href="#" aria-label="X">
-                    <i class="fa-brands fa-x-twitter"></i>
-                </a>
-
-                <a href="#" aria-label="YouTube">
-                    <i class="fa-brands fa-youtube"></i>
-                </a>
-
-            </div>
-
-        </div>
-
-
+        <div class="footer-brand"><img src="images/logo.png" alt="Mumbai Indians"><h3>MUMBAI INDIANS</h3><p>#OneFamily</p></div>
+        <div class="footer-links"><h4>EXPLORE</h4><a href="index.html">Home</a><a href="matches.html">Matches</a><a href="about.html">About</a><a href="store.html">Store</a></div>
+        <div class="footer-links"><h4>ACCOUNT</h4><a href="account.html">My Account</a><a href="matches.html">My Tickets</a><a href="store.html">My Orders</a></div>
+        <div class="footer-social"><h4>FOLLOW THE FAMILY</h4><div><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a><a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a></div></div>
     </div>
-
-
-
-    <div class="copyright">
-
-        © 2026 Mumbai Indians Fan Website
-        • Designed by PRATIK
-
-    </div>
-
-
+    <div class="copyright">© 2026 Mumbai Indians Fan Website • Designed by PRATIK</div>
 </footer>
 
-
-
-<!-- ================= SUPABASE ACCOUNT LOGIC ================= -->
-
 <script>
+(() => {
+    "use strict";
 
-const SUPABASE_URL =
-    "https://ukksxlhopvemunyibusg.supabase.co";
+    const auth = window.MIAuth;
+    if (!auth || !auth.client) {
+        console.error("Central authentication is unavailable.");
+        window.location.href = "login.html";
+        return;
+    }
 
-const SUPABASE_KEY =
-    "sb_publishable_0hFYgocoBicqr-nAMRuXYw_Zrecb0Qo";
+    const client = auth.client;
+    const $ = id => document.getElementById(id);
+    let currentUser = null;
 
+    const showMessage = (message, type = "error") => {
+        let box = $("accountMessage");
+        if (!box) {
+            box = document.createElement("div");
+            box.id = "accountMessage";
+            box.setAttribute("role", "status");
+            box.style.cssText = "margin:16px auto;max-width:900px;padding:12px 16px;border-radius:8px;text-align:center;font-weight:600;";
+            document.querySelector(".account-section")?.prepend(box);
+        }
+        box.textContent = message;
+        box.dataset.type = type;
+        window.setTimeout(() => { if (box) box.textContent = ""; }, 4500);
+    };
 
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
+    function formatActivityDate(date) {
+        if (!date || Number.isNaN(date.getTime())) return "";
+        return date.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+    }
 
+    function renderRecentActivity(bookings, orders) {
+        const container = $("activityContainer");
+        if (!container) return;
+        const activities = [];
 
+        (bookings || []).forEach(booking => activities.push({
+            type: "booking",
+            date: new Date(booking.created_at),
+            title: "Match Booking",
+            description: `Booking #${booking.booking_reference || booking.id}`
+        }));
 
-/* =========================
-   LOAD ACCOUNT
-========================= */
+        (orders || []).forEach(order => activities.push({
+            type: "order",
+            date: new Date(order.created_at),
+            title: "Store Order",
+            description: `${order.product_name || "Store purchase"} • Quantity: ${Number(order.quantity) || 0}`
+        }));
 
-async function loadAccount() {
-
-    try {
-
-
-        /* =========================
-           CURRENT USER
-        ========================= */
-
-        const {
-            data: { user },
-            error: userError
-        } = await supabaseClient.auth.getUser();
-
-
-        if (userError || !user) {
-
-            window.location.href = "login.html";
-
+        if (!activities.length) {
+            container.innerHTML = `
+                <i class="fa-regular fa-calendar-xmark"></i>
+                <h3>No activity yet</h3>
+                <p>Your ticket bookings and store orders will appear here.</p>
+                <div class="activity-buttons">
+                    <a href="matches.html" class="primary-btn">Explore Matches</a>
+                    <a href="store.html" class="secondary-btn">Visit Store</a>
+                </div>`;
             return;
-
         }
 
-
-
-        /* =========================
-           PROFILE
-        ========================= */
-
-        const {
-            data: profile,
-            error: profileError
-        } = await supabaseClient
-
-            .from("profiles")
-
-            .select("full_name, email, mobile")
-
-            .eq("id", user.id)
-
-            .maybeSingle();
-
-
-        if (profileError) {
-
-            console.error(
-                "Profile Error:",
-                profileError
-            );
-
-        }
-
-
-        const fullName =
-            profile?.full_name ||
-            user.user_metadata?.full_name ||
-            "Mumbai Indians Fan";
-
-
-        const email =
-            profile?.email ||
-            user.email ||
-            "";
-
-
-        const mobile =
-            profile?.mobile ||
-            user.user_metadata?.mobile ||
-            "";
-
-
-
-        /* DISPLAY PROFILE */
-
-        document
-            .getElementById("profileDisplayName")
-            .textContent = fullName;
-
-
-        document
-            .getElementById("profileDisplayEmail")
-            .textContent = email;
-
-
-
-        /* EDIT PROFILE */
-
-        document
-            .getElementById("profileName")
-            .value = fullName;
-
-
-        document
-            .getElementById("profileEmail")
-            .value = email;
-
-
-        document
-            .getElementById("profileMobile")
-            .value = mobile;
-
-
-
-        /* =========================
-           LOAD BOOKINGS
-        ========================= */
-
-        const {
-            data: bookings,
-            error: bookingsError
-        } = await supabaseClient
-
-            .from("bookings")
-
-            .select(`
-                id,
-                booking_reference,
-                total_amount,
-                booking_status,
-                created_at,
-                match_id,
-                booking_items (
-                    quantity
-                )
-            `)
-
-            .eq("user_id", user.id)
-
-            .order(
-                "created_at",
-                {
-                    ascending: false
-                }
-            );
-
-
-        if (bookingsError) {
-
-            console.error(
-                "Bookings Error:",
-                bookingsError
-            );
-
-        }
-
-
-        const userBookings =
-            bookings || [];
-
-
-
-        /* =========================
-           TICKET COUNT
-        ========================= */
-
-        let ticketCount = 0;
-
-
-        userBookings.forEach(
-            booking => {
-
-                if (
-                    booking.booking_items
-                ) {
-
-                    booking.booking_items.forEach(
-                        item => {
-
-                            ticketCount +=
-                                Number(
-                                    item.quantity
-                                ) || 0;
-
-                        }
-                    );
-
-                }
-
-            }
-        );
-
-
-
-        /* =========================
-           LOAD ORDERS
-        ========================= */
-
-        const {
-            data: orders,
-            error: ordersError
-        } = await supabaseClient
-
-            .from("orders")
-
-            .select(
-                "id, product_name, quantity, amount, status, created_at"
-            )
-
-            .eq("user_id", user.id)
-
-            .order(
-                "created_at",
-                {
-                    ascending: false
-                }
-            );
-
-
-        if (ordersError) {
-
-            console.error(
-                "Orders Error:",
-                ordersError
-            );
-
-        }
-
-
-        const userOrders =
-            orders || [];
-
-
-
-        /* =========================
-           UPDATE STATS
-        ========================= */
-
-        document
-            .getElementById("ticketCount")
-            .textContent = ticketCount;
-
-
-        document
-            .getElementById("orderCount")
-            .textContent =
-                userOrders.length;
-
-
-        document
-            .getElementById("bookingCount")
-            .textContent =
-                userBookings.length;
-
-
-
-        /* =========================
-           RECENT ACTIVITY
-        ========================= */
-
-        renderRecentActivity(
-            userBookings,
-            userOrders
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "Account Error:",
-            error
-        );
-
+        activities.sort((a, b) => b.date - a.date);
+        container.innerHTML = `<div class="activity-list">${activities.slice(0, 5).map(activity => `
+            <div class="activity-item">
+                <div class="activity-icon"><i class="fa-solid ${activity.type === "booking" ? "fa-ticket" : "fa-box"}"></i></div>
+                <div class="activity-content"><h4>${activity.title}</h4><p>${escapeHtml(activity.description)}</p><small>${formatActivityDate(activity.date)}</small></div>
+            </div>`).join("")}</div>`;
     }
 
-}
-
-
-
-/* =========================
-   RECENT ACTIVITY
-========================= */
-
-function renderRecentActivity(
-    bookings,
-    orders
-) {
-
-
-    const container =
-        document.getElementById(
-            "activityContainer"
-        );
-
-
-    if (!container) {
-        return;
+    function escapeHtml(value) {
+        return String(value ?? "").replace(/[&<>'"]/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[char]));
     }
 
+    async function loadAccount() {
+        currentUser = await auth.requireAuth("login.html");
+        if (!currentUser) return;
 
-    const activities = [];
+        try {
+            const { data: profile, error: profileError } = await client
+                .from("profiles")
+                .select("full_name, email, mobile")
+                .eq("id", currentUser.id)
+                .maybeSingle();
 
+            if (profileError) console.error("Profile Error:", profileError);
 
+            const fullName = profile?.full_name || currentUser.user_metadata?.full_name || "Mumbai Indians Fan";
+            const email = profile?.email || currentUser.email || "";
+            const mobile = profile?.mobile || currentUser.user_metadata?.mobile || "";
 
-    /* BOOKINGS */
+            $("profileDisplayName").textContent = fullName;
+            $("profileDisplayEmail").textContent = email;
+            $("profileName").value = fullName;
+            $("profileEmail").value = email;
+            $("profileMobile").value = mobile;
 
-    bookings.forEach(
-        booking => {
+            const [{ data: bookings, error: bookingsError }, { data: orders, error: ordersError }] = await Promise.all([
+                client.from("bookings").select("id, booking_reference, total_amount, booking_status, created_at, match_id, booking_items(quantity)").eq("user_id", currentUser.id).order("created_at", { ascending: false }),
+                client.from("orders").select("id, product_name, quantity, amount, status, created_at").eq("user_id", currentUser.id).order("created_at", { ascending: false })
+            ]);
 
-            activities.push({
+            if (bookingsError) console.error("Bookings Error:", bookingsError);
+            if (ordersError) console.error("Orders Error:", ordersError);
 
-                type: "booking",
+            const userBookings = bookings || [];
+            const userOrders = orders || [];
+            const ticketCount = userBookings.reduce((total, booking) => total + (booking.booking_items || []).reduce((sum, item) => sum + (Number(item.quantity) || 0), 0), 0);
 
-                date: new Date(
-                    booking.created_at
-                ),
-
-                title:
-                    "Match Booking",
-
-                description:
-                    `Booking #${
-                        booking.booking_reference
-                    }`
-
-            });
-
+            $("ticketCount").textContent = ticketCount;
+            $("orderCount").textContent = userOrders.length;
+            $("bookingCount").textContent = userBookings.length;
+            renderRecentActivity(userBookings, userOrders);
+        } catch (error) {
+            console.error("Account Error:", error);
+            showMessage("Unable to load some account information. Please refresh and try again.");
         }
-    );
-
-
-
-    /* ORDERS */
-
-    orders.forEach(
-        order => {
-
-            activities.push({
-
-                type: "order",
-
-                date: new Date(
-                    order.created_at
-                ),
-
-                title:
-                    "Store Order",
-
-                description:
-                    `${order.product_name} • Quantity: ${
-                        order.quantity
-                    }`
-
-            });
-
-        }
-    );
-
-
-
-    /* NO ACTIVITY */
-
-    if (!activities.length) {
-
-        container.innerHTML = `
-
-            <i class="fa-regular fa-calendar-xmark"></i>
-
-            <h3>
-                No activity yet
-            </h3>
-
-            <p>
-                Your ticket bookings and store orders
-                will appear here.
-            </p>
-
-            <div class="activity-buttons">
-
-                <a
-                    href="matches.html"
-                    class="primary-btn"
-                >
-                    Explore Matches
-                </a>
-
-                <a
-                    href="store.html"
-                    class="secondary-btn"
-                >
-                    Visit Store
-                </a>
-
-            </div>
-
-        `;
-
-        return;
-
     }
 
-
-
-    /* SORT */
-
-    activities.sort(
-        (a, b) =>
-            b.date - a.date
-    );
-
-
-
-    /* LATEST 5 */
-
-    const latestActivities =
-        activities.slice(0, 5);
-
-
-
-    container.innerHTML = `
-
-        <div class="activity-list">
-
-            ${latestActivities.map(
-                activity => `
-
-                <div class="activity-item">
-
-                    <div class="activity-icon">
-
-                        <i class="fa-solid ${
-                            activity.type === "booking"
-                                ? "fa-ticket"
-                                : "fa-box"
-                        }"></i>
-
-                    </div>
-
-
-                    <div class="activity-content">
-
-                        <h4>
-                            ${activity.title}
-                        </h4>
-
-                        <p>
-                            ${activity.description}
-                        </p>
-
-                        <small>
-                            ${formatActivityDate(
-                                activity.date
-                            )}
-                        </small>
-
-                    </div>
-
-                </div>
-
-            `
-            ).join("")}
-
-        </div>
-
-    `;
-
-}
-
-
-
-/* =========================
-   FORMAT DATE
-========================= */
-
-function formatActivityDate(date) {
-
-    if (
-        !date ||
-        isNaN(date)
-    ) {
-
-        return "";
-
+    function openProfileModal(event) {
+        event?.preventDefault();
+        $("profileModal")?.classList.add("active");
+        $("profileName")?.focus();
     }
 
-
-    return date.toLocaleDateString(
-        "en-IN",
-        {
-            day: "2-digit",
-            month: "short",
-            year: "numeric"
-        }
-    );
-
-}
-
-
-
-/* =========================
-   OPEN PROFILE MODAL
-========================= */
-
-function openProfileModal(event) {
-
-    event.preventDefault();
-
-
-    document
-        .getElementById("profileModal")
-        .classList.add("active");
-
-}
-
-
-
-document
-    .getElementById("editProfileBtn")
-    .addEventListener(
-        "click",
-        openProfileModal
-    );
-
-
-document
-    .getElementById("manageProfileBtn")
-    .addEventListener(
-        "click",
-        openProfileModal
-    );
-
-
-
-/* =========================
-   CLOSE PROFILE MODAL
-========================= */
-
-document
-    .getElementById("closeProfileModal")
-    .addEventListener(
-        "click",
-        function () {
-
-            document
-                .getElementById("profileModal")
-                .classList.remove(
-                    "active"
-                );
-
-        }
-    );
-
-
-
-/* =========================
-   SAVE PROFILE
-========================= */
-
-document
-    .getElementById("profileForm")
-    .addEventListener(
-        "submit",
-        async function (event) {
-
-            event.preventDefault();
-
-
-            const name =
-                document
-                    .getElementById(
-                        "profileName"
-                    )
-                    .value
-                    .trim();
-
-
-            const mobile =
-                document
-                    .getElementById(
-                        "profileMobile"
-                    )
-                    .value
-                    .trim();
-
-
-
-            if (!name) {
-
-                alert(
-                    "Please enter your full name."
-                );
-
-                return;
-
-            }
-
-
-
-            if (
-                mobile &&
-                !/^[0-9]{10}$/.test(mobile)
-            ) {
-
-                alert(
-                    "Please enter a valid 10-digit mobile number."
-                );
-
-                return;
-
-            }
-
-
-
-            /* CURRENT USER */
-
-            const {
-                data: { user },
-                error: userError
-            } =
-                await supabaseClient.auth.getUser();
-
-
-            if (
-                userError ||
-                !user
-            ) {
-
-                window.location.href =
-                    "login.html";
-
-                return;
-
-            }
-
-
-
-            /* UPDATE PROFILE TABLE */
-
-            const {
-                error: profileError
-            } =
-                await supabaseClient
-
-                    .from("profiles")
-
-                    .update({
-
-                        full_name: name,
-
-                        mobile: mobile
-
-                    })
-
-                    .eq(
-                        "id",
-                        user.id
-                    );
-
-
-
-            if (profileError) {
-
-                console.error(
-                    "Profile Update Error:",
-                    profileError
-                );
-
-                alert(
-                    "Unable to update profile: " +
-                    profileError.message
-                );
-
-                return;
-
-            }
-
-
-
-            /* UPDATE AUTH METADATA */
-
-            const {
-                error: authError
-            } =
-                await supabaseClient.auth.updateUser({
-
-                    data: {
-
-                        full_name: name,
-
-                        mobile: mobile
-
-                    }
-
-                });
-
-
-            if (authError) {
-
-                console.error(
-                    "Auth Metadata Error:",
-                    authError
-                );
-
-            }
-
-
-
-            /* UPDATE SCREEN */
-
-            document
-                .getElementById(
-                    "profileDisplayName"
-                )
-                .textContent = name;
-
-
-            document
-                .getElementById(
-                    "profileMobile"
-                )
-                .value = mobile;
-
-
-
-            document
-                .getElementById(
-                    "profileModal"
-                )
-                .classList.remove(
-                    "active"
-                );
-
-
-            alert(
-                "Profile updated successfully!"
-            );
-
-        }
-    );
-
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-document
-    .getElementById("logoutBtn")
-    .addEventListener(
-        "click",
-        async function (event) {
-
-            event.preventDefault();
-
-
-            const {
-                error
-            } =
-                await supabaseClient
-                    .auth
-                    .signOut();
-
-
-            if (error) {
-
-                alert(
-                    "Logout failed. Please try again."
-                );
-
-                return;
-
-            }
-
-
-            window.location.href =
-                "login.html";
-
-        }
-    );
-
-
-
-/* =========================
-   START ACCOUNT
-========================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        loadAccount();
-
+    function closeProfileModal() {
+        $("profileModal")?.classList.remove("active");
     }
-);
 
+    $("editProfileBtn")?.addEventListener("click", openProfileModal);
+    $("manageProfileBtn")?.addEventListener("click", openProfileModal);
+    $("closeProfileModal")?.addEventListener("click", closeProfileModal);
+    $("profileModal")?.addEventListener("click", event => { if (event.target === $("profileModal")) closeProfileModal(); });
+    document.addEventListener("keydown", event => { if (event.key === "Escape") closeProfileModal(); });
+
+    $("profileForm")?.addEventListener("submit", async event => {
+        event.preventDefault();
+        if (!currentUser) {
+            currentUser = await auth.getCurrentUser();
+            if (!currentUser) { window.location.href = "login.html"; return; }
+        }
+
+        const name = $("profileName").value.trim();
+        const mobile = $("profileMobile").value.trim();
+        if (!name) { showMessage("Please enter your full name."); return; }
+        if (mobile && !/^[0-9]{10}$/.test(mobile)) { showMessage("Please enter a valid 10-digit mobile number."); return; }
+
+        const saveButton = $("profileForm").querySelector("button[type=submit]");
+        const originalText = saveButton.innerHTML;
+        saveButton.disabled = true;
+        saveButton.innerHTML = "Saving... <i class=\"fa-solid fa-spinner fa-spin\"></i>";
+
+        try {
+            const { error: profileError } = await client.from("profiles").update({ full_name: name, mobile }).eq("id", currentUser.id);
+            if (profileError) throw profileError;
+
+            const { error: authError } = await client.auth.updateUser({ data: { full_name: name, mobile } });
+            if (authError) console.error("Auth Metadata Error:", authError);
+
+            $("profileDisplayName").textContent = name;
+            closeProfileModal();
+            showMessage("Profile updated successfully!", "success");
+        } catch (error) {
+            console.error("Profile Update Error:", error);
+            showMessage(error?.message || "Unable to update profile. Please try again.");
+        } finally {
+            saveButton.disabled = false;
+            saveButton.innerHTML = originalText;
+        }
+    });
+
+    $("logoutBtn")?.addEventListener("click", async event => {
+        event.preventDefault();
+        const result = await auth.logoutUser("login.html");
+        if (!result.success) showMessage("Logout failed. Please try again.");
+    });
+
+    loadAccount();
+})();
 </script>
-
-
 </body>
 </html>
