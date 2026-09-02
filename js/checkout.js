@@ -6,22 +6,30 @@ document.addEventListener('DOMContentLoaded', async () => {
   const summary = document.getElementById('summary');
   const message = document.getElementById('message');
   const button = document.getElementById('placeOrderBtn');
-  const cart = JSON.parse(localStorage.getItem('miCart') || '[]');
+
+  let cart = [];
+  try {
+    const saved = JSON.parse(localStorage.getItem('mi_cart') || '[]');
+    cart = Array.isArray(saved) ? saved : [];
+  } catch {
+    cart = [];
+  }
 
   const showMessage = (text, type = 'error') => {
     message.textContent = text;
     message.className = `message ${type}`;
+    message.style.display = text ? 'block' : 'none';
   };
 
   const escapeHTML = (value) => String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 
-  if (!Array.isArray(cart) || !cart.length) {
+  if (!cart.length) {
     summary.innerHTML = '<div class="empty">Your cart is empty.<br><br><a href="store.html">Return to Store</a></div>';
     button.disabled = true;
     return;
   }
 
-  const ids = cart.map(item => Number(item.id)).filter(Number.isInteger);
+  const ids = [...new Set(cart.map(item => Number(item.id)).filter(Number.isInteger && Number.isSafeInteger))];
   if (!ids.length) {
     showMessage('Your cart contains invalid items. Please return to the store.');
     button.disabled = true;
@@ -35,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     .eq('is_active', true);
 
   if (error || !products?.length) {
-    showMessage('We could not verify your cart right now. Please try again.');
+    showMessage('We could not verify your cart right now. Please refresh and try again.');
     button.disabled = true;
     return;
   }
@@ -49,12 +57,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const product = byId.get(Number(item.id));
     const quantity = Number(item.quantity);
     if (!product || !Number.isInteger(quantity) || quantity < 1 || quantity > 50) {
-      showMessage('One or more cart items are no longer valid. Please review your cart.', 'error');
+      showMessage('One or more cart items are no longer valid. Please review your cart.');
       button.disabled = true;
       return;
     }
     if (Number(product.stock) < quantity) {
-      showMessage(`${product.name} does not have enough stock for this quantity.`, 'error');
+      showMessage(`${product.name} does not have enough stock for this quantity.`);
       button.disabled = true;
       return;
     }
@@ -76,7 +84,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     showMessage('');
-    message.style.display = 'none';
 
     const name = document.getElementById('name').value.trim();
     const mobile = document.getElementById('mobile').value.replace(/\D/g, '');
@@ -108,7 +115,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
-    localStorage.removeItem('miCart');
+    localStorage.removeItem('mi_cart');
     const reference = data?.order_reference || 'your order';
     showMessage(`Order placed successfully. Reference: ${reference}`, 'success');
     button.textContent = 'Order Confirmed';
