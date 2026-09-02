@@ -43,7 +43,8 @@ async function requireAuth(loginPath = "login.html") {
     const user = await getCurrentUser();
     if (!user) {
         const currentPage = window.location.pathname.split("/").pop() || "index.html";
-        const redirect = encodeURIComponent(currentPage);
+        const redirectTarget = currentPage + (window.location.search || "");
+        const redirect = encodeURIComponent(redirectTarget);
         window.location.href = `${loginPath}?redirect=${redirect}`;
         return null;
     }
@@ -57,8 +58,30 @@ const AUTH_ALLOWED_PAGES = new Set([
 
 function getSafeRedirect(defaultPage = "index.html") {
     const params = new URLSearchParams(window.location.search);
-    const redirect = params.get("redirect");
-    return redirect && AUTH_ALLOWED_PAGES.has(redirect) ? redirect : defaultPage;
+    const raw = params.get("redirect");
+    if (!raw) return defaultPage;
+
+    let decoded;
+    try {
+        decoded = decodeURIComponent(raw);
+    } catch {
+        return defaultPage;
+    }
+
+    const questionIndex = decoded.indexOf("?");
+    const page = questionIndex >= 0 ? decoded.slice(0, questionIndex) : decoded;
+    const query = questionIndex >= 0 ? decoded.slice(questionIndex + 1) : "";
+
+    if (!AUTH_ALLOWED_PAGES.has(page)) return defaultPage;
+
+    if (page === "booking.html") {
+        const bookingParams = new URLSearchParams(query);
+        const matchId = bookingParams.get("match_id");
+        if (!matchId || !/^\d+$/.test(matchId)) return defaultPage;
+        return `booking.html?match_id=${encodeURIComponent(matchId)}`;
+    }
+
+    return page;
 }
 
 async function updateNavbarAuth() {
