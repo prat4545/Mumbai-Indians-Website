@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  const ids = [...new Set(cart.map(item => Number(item.id)).filter(Number.isInteger && Number.isSafeInteger))];
+  const ids = [...new Set(cart.map(item => Number(item.id)).filter(id => Number.isSafeInteger(id) && id > 0))];
   if (!ids.length) {
     showMessage('Your cart contains invalid items. Please return to the store.');
     button.disabled = true;
