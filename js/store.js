@@ -10,180 +10,32 @@ const checkoutBtn = document.getElementById("checkoutBtn");
 let products = [];
 let cart = [];
 
-function escapeHTML(value) {
-    return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
-}
-
-function formatPrice(value) {
-    return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(Number(value) || 0);
-}
-
-function showStoreMessage(message) {
-    let box = document.getElementById("storeMessage");
-    if (!box) {
-        box = document.createElement("div");
-        box.id = "storeMessage";
-        box.setAttribute("role", "status");
-        box.style.cssText = "position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:9999;padding:12px 18px;border-radius:10px;background:#111;color:#fff;box-shadow:0 10px 30px rgba(0,0,0,.2);max-width:min(90vw,520px);text-align:center";
-        document.body.appendChild(box);
-    }
-    box.textContent = message;
-    clearTimeout(showStoreMessage.timer);
-    showStoreMessage.timer = setTimeout(() => box.remove(), 3200);
-}
-
-function loadCart() {
-    try {
-        const saved = JSON.parse(localStorage.getItem("mi_cart") || "[]");
-        cart = Array.isArray(saved) ? saved.filter(item => item && item.id != null && Number(item.quantity) > 0) : [];
-    } catch { cart = []; }
-    renderCart();
-}
-
-function saveCart() { localStorage.setItem("mi_cart", JSON.stringify(cart)); }
+function escapeHTML(value) { return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;"); }
+function formatPrice(value) { return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(Number(value) || 0); }
+function showStoreMessage(message) { let box = document.getElementById("storeMessage"); if (!box) { box=document.createElement("div"); box.id="storeMessage"; box.setAttribute("role","status"); box.style.cssText="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:9999;padding:12px 18px;border-radius:10px;background:#111;color:#fff;box-shadow:0 10px 30px rgba(0,0,0,.2);max-width:min(90vw,520px);text-align:center"; document.body.appendChild(box); } box.textContent=message; clearTimeout(showStoreMessage.timer); showStoreMessage.timer=setTimeout(()=>box.remove(),3200); }
+function loadCart() { try { const saved=JSON.parse(localStorage.getItem("mi_cart")||"[]"); cart=Array.isArray(saved)?saved.filter(item=>item&&item.id!=null&&Number(item.quantity)>0):[]; } catch { cart=[]; } renderCart(); }
+function saveCart() { localStorage.setItem("mi_cart",JSON.stringify(cart)); }
 
 async function loadProducts() {
-    if (!productGrid) return;
-    productGrid.innerHTML = `<div class="loading-products"><i class="fa-solid fa-spinner fa-spin"></i><p>Loading MI products...</p></div>`;
-    if (!storeClient) {
-        productGrid.innerHTML = `<div class="loading-products"><i class="fa-solid fa-circle-exclamation"></i><p>Store connection is unavailable. Please refresh the page.</p></div>`;
-        return;
-    }
-    try {
-        const { data, error } = await storeClient.from("products").select("*").eq("is_active", true).order("created_at", { ascending: false });
-        if (error) throw error;
-        products = Array.isArray(data) ? data : [];
-        renderProducts();
-        reconcileCartStock();
-    } catch (error) {
-        console.error("Product Load Error:", error);
-        productGrid.innerHTML = `<div class="loading-products"><i class="fa-solid fa-circle-exclamation"></i><p>Unable to load products right now.</p><button type="button" id="retryProductsBtn">Try Again</button></div>`;
-        document.getElementById("retryProductsBtn")?.addEventListener("click", loadProducts);
-    }
+  if (!productGrid) return;
+  productGrid.innerHTML=`<div class="loading-products"><i class="fa-solid fa-spinner fa-spin"></i><p>Loading MI products...</p></div>`;
+  if (!storeClient) { productGrid.innerHTML=`<div class="loading-products"><i class="fa-solid fa-circle-exclamation"></i><p>Store connection is unavailable. Please refresh the page.</p></div>`; return; }
+  try { const {data,error}=await storeClient.from("products").select("*").eq("is_active",true).order("created_at",{ascending:false}); if(error)throw error; products=Array.isArray(data)?data:[]; renderProducts(); reconcileCartStock(); }
+  catch(error) { console.error("Product Load Error:",error); productGrid.innerHTML=`<div class="loading-products"><i class="fa-solid fa-circle-exclamation"></i><p>Unable to load products right now.</p><button type="button" id="retryProductsBtn">Try Again</button></div>`; document.getElementById("retryProductsBtn")?.addEventListener("click",loadProducts); }
 }
-
-function reconcileCartStock() {
-    cart = cart.map(item => {
-        const product = products.find(p => String(p.id) === String(item.id));
-        if (!product) return null;
-        const stock = Math.max(0, Number(product.stock) || 0);
-        return { ...item, name: product.name, category: product.category, price: Number(product.price) || 0, quantity: Math.min(Number(item.quantity) || 1, stock) };
-    }).filter(Boolean).filter(item => item.quantity > 0);
-    saveCart();
-    renderCart();
-}
-
-function getProductImage(product) { return product.image_url || product.image || ""; }
-
+function reconcileCartStock() { cart=cart.map(item=>{const product=products.find(p=>String(p.id)===String(item.id)); if(!product)return null; const stock=Math.max(0,Number(product.stock)||0); return {...item,name:product.name,category:product.category,price:Number(product.price)||0,quantity:Math.min(Number(item.quantity)||1,stock)};}).filter(Boolean).filter(item=>item.quantity>0); saveCart(); renderCart(); }
+function getProductImage(product) { return product.image_url||product.image||""; }
 function renderProducts() {
-    if (!productGrid) return;
-    if (!products.length) {
-        productGrid.innerHTML = `<div class="loading-products"><i class="fa-solid fa-box-open"></i><p>No products are available right now.</p></div>`;
-        return;
-    }
-    productGrid.innerHTML = "";
-    products.forEach(product => {
-        const stock = Math.max(0, Number(product.stock) || 0);
-        const image = getProductImage(product);
-        const card = document.createElement("article");
-        card.className = "product-card";
-        card.innerHTML = `<div class="product-image">${image ? `<img src="${escapeHTML(image)}" alt="${escapeHTML(product.name)}" class="product-real-image">` : `<div class="product-placeholder"><i class="fa-solid fa-shirt"></i></div>`}</div><div class="product-content"><p class="product-category">${escapeHTML(product.category || "MI MERCHANDISE")}</p><h3>${escapeHTML(product.name || "MI Product")}</h3><p class="product-description">${escapeHTML(product.description || "")}</p><div class="product-bottom"><strong>${formatPrice(product.price)}</strong><button type="button" class="buy-btn" data-product-id="${escapeHTML(product.id)}" ${stock <= 0 ? "disabled" : ""}>${stock > 0 ? "Add to Cart" : "Out of Stock"} <i class="fa-solid fa-cart-plus"></i></button></div></div>`;
-        const imageEl = card.querySelector("img");
-        imageEl?.addEventListener("error", () => imageEl.replaceWith(Object.assign(document.createElement("div"), { className: "product-placeholder", innerHTML: '<i class="fa-solid fa-shirt"></i>' })));
-        card.querySelector(".buy-btn")?.addEventListener("click", () => addToCart(product.id));
-        productGrid.appendChild(card);
-    });
+  if(!productGrid)return;
+  if(!products.length){productGrid.innerHTML=`<div class="loading-products"><i class="fa-solid fa-box-open"></i><p>No products are available right now.</p></div>`;return;}
+  productGrid.innerHTML="";
+  products.forEach(product=>{const stock=Math.max(0,Number(product.stock)||0),image=getProductImage(product),card=document.createElement("article"); card.className="product-card"; card.innerHTML=`<div class="product-image">${image?`<img src="${escapeHTML(image)}" alt="${escapeHTML(product.name)}" class="product-real-image">`:`<div class="product-placeholder"><i class="fa-solid fa-shirt"></i></div>`}</div><div class="product-content"><p class="product-category">${escapeHTML(product.category||"MI MERCHANDISE")}</p><h3>${escapeHTML(product.name||"MI Product")}</h3><p class="product-description">${escapeHTML(product.description||"")}</p><div class="product-bottom"><strong>${formatPrice(product.price)}</strong><button type="button" class="buy-btn" data-product-id="${escapeHTML(product.id)}" ${stock<=0?"disabled":""}>${stock>0?"Add to Cart":"Out of Stock"} <i class="fa-solid fa-cart-plus"></i></button></div></div>`; const imageEl=card.querySelector("img"); imageEl?.addEventListener("error",()=>imageEl.replaceWith(Object.assign(document.createElement("div"),{className:"product-placeholder",innerHTML:'<i class="fa-solid fa-shirt"></i>'}))); card.querySelector(".buy-btn")?.addEventListener("click",()=>addToCart(product.id)); productGrid.appendChild(card); });
 }
-
-function addToCart(productId) {
-    const product = products.find(item => String(item.id) === String(productId));
-    if (!product) return;
-    const stock = Math.max(0, Number(product.stock) || 0);
-    if (stock <= 0) return showStoreMessage("This product is currently out of stock.");
-    const existing = cart.find(item => String(item.id) === String(productId));
-    if (existing) {
-        if (existing.quantity >= stock) return showStoreMessage("You have reached the available stock limit.");
-        existing.quantity += 1;
-    } else cart.push({ id: product.id, name: product.name, category: product.category || "MI MERCHANDISE", price: Number(product.price) || 0, quantity: 1 });
-    saveCart(); renderCart(); openCart();
-}
-
-function changeQuantity(productId, change) {
-    const item = cart.find(entry => String(entry.id) === String(productId));
-    if (!item) return;
-    const product = products.find(entry => String(entry.id) === String(productId));
-    const stock = product ? Math.max(0, Number(product.stock) || 0) : Number.MAX_SAFE_INTEGER;
-    item.quantity += change;
-    if (item.quantity > stock) { item.quantity = stock; showStoreMessage("Quantity limited to available stock."); }
-    if (item.quantity <= 0) cart = cart.filter(entry => String(entry.id) !== String(productId));
-    saveCart(); renderCart();
-}
-
-function removeFromCart(productId) { cart = cart.filter(item => String(item.id) !== String(productId)); saveCart(); renderCart(); }
-
-function renderCart() {
-    if (!cartItems || !cartCount || !cartTotal) return;
-    const totalQuantity = cart.reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
-    const totalAmount = cart.reduce((sum, item) => sum + (Number(item.price) || 0) * (Number(item.quantity) || 0), 0);
-    cartCount.textContent = totalQuantity;
-    cartTotal.textContent = formatPrice(totalAmount);
-    if (!cart.length) {
-        cartItems.innerHTML = `<div class="empty-cart"><i class="fa-solid fa-cart-shopping"></i><h3>Your cart is empty</h3><p>Add some MI gear to continue.</p></div>`;
-        return;
-    }
-    cartItems.innerHTML = "";
-    cart.forEach(item => {
-        const row = document.createElement("div"); row.className = "cart-item";
-        row.innerHTML = `<div class="cart-item-icon"><i class="fa-solid fa-shirt"></i></div><div class="cart-item-info"><h4>${escapeHTML(item.name)}</h4><p>${formatPrice(item.price)}</p><div class="quantity-control"><button type="button" data-action="decrease" aria-label="Decrease quantity"><i class="fa-solid fa-minus"></i></button><span>${item.quantity}</span><button type="button" data-action="increase" aria-label="Increase quantity"><i class="fa-solid fa-plus"></i></button></div></div><div class="cart-item-right"><strong>${formatPrice(Number(item.price) * Number(item.quantity))}</strong><button type="button" data-action="remove" aria-label="Remove item"><i class="fa-solid fa-trash"></i></button></div>`;
-        row.querySelector('[data-action="decrease"]')?.addEventListener("click", () => changeQuantity(item.id, -1));
-        row.querySelector('[data-action="increase"]')?.addEventListener("click", () => changeQuantity(item.id, 1));
-        row.querySelector('[data-action="remove"]')?.addEventListener("click", () => removeFromCart(item.id));
-        cartItems.appendChild(row);
-    });
-}
-
-function openCart() { cartDrawer?.classList.add("open"); cartOverlay?.classList.add("show"); document.body.classList.add("cart-open"); }
-function closeCart() { cartDrawer?.classList.remove("open"); cartOverlay?.classList.remove("show"); document.body.classList.remove("cart-open"); }
-
-async function checkout() {
-    if (!cart.length) return showStoreMessage("Your cart is empty.");
-    if (!storeClient) return showStoreMessage("Store connection is unavailable. Please refresh and try again.");
-    const user = await window.MIAuth?.getCurrentUser();
-    if (!user) { window.location.href = "login.html?redirect=store.html"; return; }
-
-    checkoutBtn.disabled = true;
-    const original = checkoutBtn.innerHTML;
-    checkoutBtn.innerHTML = `Processing... <i class="fa-solid fa-spinner fa-spin"></i>`;
-    try {
-        const items = cart.map(item => ({ product_id: item.id, quantity: Number(item.quantity) }));
-        const { data, error } = await storeClient.rpc("create_store_order", {
-            p_items: items,
-            p_shipping_name: "Guest Customer",
-            p_shipping_mobile: "0000000000",
-            p_shipping_address: "To be provided",
-            p_shipping_city: "To be provided",
-            p_shipping_pincode: "000000"
-        });
-        if (error) throw error;
-        const result = typeof data === "string" ? JSON.parse(data) : data;
-        if (!result?.success) throw new Error("Order could not be created.");
-        cart = []; saveCart(); renderCart(); closeCart();
-        window.location.href = `account.html?order=${encodeURIComponent(result.order_reference || result.order_id)}`;
-    } catch (error) {
-        console.error("Order Creation Error:", error);
-        showStoreMessage(error?.message || "Unable to create your order right now.");
-    } finally {
-        checkoutBtn.disabled = false;
-        checkoutBtn.innerHTML = original;
-    }
-}
-
-document.getElementById("cartNavBtn")?.addEventListener("click", openCart);
-document.getElementById("closeCartBtn")?.addEventListener("click", closeCart);
-cartOverlay?.addEventListener("click", closeCart);
-checkoutBtn?.addEventListener("click", checkout);
-document.getElementById("exploreCollectionBtn")?.addEventListener("click", () => productGrid?.scrollIntoView({ behavior: "smooth" }));
-document.addEventListener("keydown", event => { if (event.key === "Escape") closeCart(); });
-
-loadCart();
-loadProducts();
+function addToCart(productId){const product=products.find(item=>String(item.id)===String(productId));if(!product)return;const stock=Math.max(0,Number(product.stock)||0);if(stock<=0)return showStoreMessage("This product is currently out of stock.");const existing=cart.find(item=>String(item.id)===String(productId));if(existing){if(existing.quantity>=stock)return showStoreMessage("You have reached the available stock limit.");existing.quantity+=1;}else cart.push({id:product.id,name:product.name,category:product.category||"MI MERCHANDISE",price:Number(product.price)||0,quantity:1});saveCart();renderCart();openCart();}
+function changeQuantity(productId,change){const item=cart.find(entry=>String(entry.id)===String(productId));if(!item)return;const product=products.find(entry=>String(entry.id)===String(productId));const stock=product?Math.max(0,Number(product.stock)||0):Number.MAX_SAFE_INTEGER;item.quantity+=change;if(item.quantity>stock){item.quantity=stock;showStoreMessage("Quantity limited to available stock.");}if(item.quantity<=0)cart=cart.filter(entry=>String(entry.id)!==String(productId));saveCart();renderCart();}
+function removeFromCart(productId){cart=cart.filter(item=>String(item.id)!==String(productId));saveCart();renderCart();}
+function renderCart(){if(!cartItems||!cartCount||!cartTotal)return;const totalQuantity=cart.reduce((sum,item)=>sum+(Number(item.quantity)||0),0),totalAmount=cart.reduce((sum,item)=>sum+(Number(item.price)||0)*(Number(item.quantity)||0),0);cartCount.textContent=totalQuantity;cartTotal.textContent=formatPrice(totalAmount);if(!cart.length){cartItems.innerHTML=`<div class="empty-cart"><i class="fa-solid fa-cart-shopping"></i><h3>Your cart is empty</h3><p>Add some MI gear to continue.</p></div>`;return;}cartItems.innerHTML="";cart.forEach(item=>{const row=document.createElement("div");row.className="cart-item";row.innerHTML=`<div class="cart-item-icon"><i class="fa-solid fa-shirt"></i></div><div class="cart-item-info"><h4>${escapeHTML(item.name)}</h4><p>${formatPrice(item.price)}</p><div class="quantity-control"><button type="button" data-action="decrease" aria-label="Decrease quantity"><i class="fa-solid fa-minus"></i></button><span>${item.quantity}</span><button type="button" data-action="increase" aria-label="Increase quantity"><i class="fa-solid fa-plus"></i></button></div></div><div class="cart-item-right"><strong>${formatPrice(Number(item.price)*Number(item.quantity))}</strong><button type="button" data-action="remove" aria-label="Remove item"><i class="fa-solid fa-trash"></i></button></div>`;row.querySelector('[data-action="decrease"]')?.addEventListener("click",()=>changeQuantity(item.id,-1));row.querySelector('[data-action="increase"]')?.addEventListener("click",()=>changeQuantity(item.id,1));row.querySelector('[data-action="remove"]')?.addEventListener("click",()=>removeFromCart(item.id));cartItems.appendChild(row);});}
+function openCart(){cartDrawer?.classList.add("open");cartOverlay?.classList.add("show");document.body.classList.add("cart-open");}
+function closeCart(){cartDrawer?.classList.remove("open");cartOverlay?.classList.remove("show");document.body.classList.remove("cart-open");}
+async function checkout(){if(!cart.length)return showStoreMessage("Your cart is empty.");const user=await window.MIAuth?.getCurrentUser();if(!user){window.location.href="login.html?redirect=store.html";return;}window.location.href="checkout.html";}
+document.getElementById("cartNavBtn")?.addEventListener("click",openCart);document.getElementById("closeCartBtn")?.addEventListener("click",closeCart);cartOverlay?.addEventListener("click",closeCart);checkoutBtn?.addEventListener("click",checkout);document.getElementById("exploreCollectionBtn")?.addEventListener("click",()=>productGrid?.scrollIntoView({behavior:"smooth"}));document.addEventListener("keydown",event=>{if(event.key==="Escape")closeCart();});loadCart();loadProducts();
