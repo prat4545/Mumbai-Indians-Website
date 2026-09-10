@@ -1,39 +1,8 @@
-const API_BASE = "https://ipl-okn0.onrender.com";
-const ticketMatches = document.getElementById("ticketMatches");
-const FALLBACK_IMAGE = "https://www.mumbaiindians.com/static-assets/waf-images/c7/6e/c1/16-9/592-444/DAtzKSYFre.jpg";
-
-function value(match, keys, fallback = "") { for (const key of keys) if (match?.[key] != null && match[key] !== "") return match[key]; return fallback; }
-function teamName(team) { return typeof team === "object" ? value(team,["name","team"],"Opponent") : String(team || "Opponent"); }
-function getTeams(match) { const a=teamName(value(match,["team1","teamA","homeTeam"],match?.teams?.[0])); const b=teamName(value(match,["team2","teamB","awayTeam"],match?.teams?.[1])); return a.toLowerCase().includes("mumbai") ? [a,b] : [b,a]; }
-function matchDate(match) { return value(match,["date","matchDate","startDate","start_time"],""); }
-function formatDate(date) { const d=new Date(date); return Number.isNaN(d.getTime()) ? "DATE TBA" : d.toLocaleDateString("en-IN",{weekday:"short",day:"2-digit",month:"short",year:"numeric"}).toUpperCase(); }
-function escapeHTML(value) { return String(value ?? "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;"); }
-function createCard(match) {
-    const [mi, opponent] = getTeams(match);
-    const id = value(match,["id","match_id","matchId"],"");
-    const date = matchDate(match);
-    const time = value(match,["time","matchTime"],"Time TBA");
-    const venue = value(match,["venue","stadium"],"Venue TBA");
-    const card = document.createElement("article");
-    card.className = "ticket-card";
-    card.innerHTML = `<div class="ticket-card-image"><span class="ticket-badge">MI MATCH DAY</span><img src="${FALLBACK_IMAGE}" alt="Mumbai Indians match day"></div><div class="ticket-card-content"><span class="ticket-date">${escapeHTML(formatDate(date))}</span><h3>Mumbai Indians vs ${escapeHTML(opponent)}</h3><div class="ticket-meta"><span><i class="fa-regular fa-clock"></i>${escapeHTML(time)}</span><span><i class="fa-solid fa-location-dot"></i>${escapeHTML(venue)}</span></div><div class="ticket-card-actions"><a class="book-btn" href="${id ? `booking.html?match_id=${encodeURIComponent(id)}` : "matches.html"}"><i class="fa-solid fa-ticket"></i> Book Tickets</a><a class="details-btn" href="${id ? `match-details.html?match_id=${encodeURIComponent(id)}` : "matches.html"}">Details</a></div></div>`;
-    return card;
-}
-async function loadTicketMatches() {
-    try {
-        const response = await fetch(`${API_BASE}/ipl-2026-schedule`, { cache: "no-store" });
-        if (!response.ok) throw new Error("Schedule unavailable");
-        const data = await response.json();
-        const matches = (Array.isArray(data) ? data : data.matches || data.data || []).filter(match => getTeams(match)[0].toLowerCase().includes("mumbai"));
-        matches.sort((a,b) => new Date(matchDate(a)) - new Date(matchDate(b)));
-        const upcoming = matches.filter(match => { const t = new Date(matchDate(match)).getTime(); return Number.isNaN(t) || t >= Date.now(); });
-        const visible = (upcoming.length ? upcoming : matches).slice(0, 8);
-        ticketMatches.innerHTML = "";
-        if (!visible.length) throw new Error("No matches");
-        visible.forEach(match => ticketMatches.appendChild(createCard(match)));
-    } catch (error) {
-        console.error("Ticket Match Error:", error);
-        ticketMatches.innerHTML = `<article class="ticket-card"><div class="ticket-card-image"><span class="ticket-badge">MI MATCH DAY</span><img src="${FALLBACK_IMAGE}" alt="Mumbai Indians match day"></div><div class="ticket-card-content"><span class="ticket-date">MATCH CENTRE</span><h3>Tickets & Match Information</h3><p class="ticket-meta">Open the Match Centre to see the latest Mumbai Indians fixtures and available booking options.</p><div class="ticket-card-actions"><a class="book-btn" href="matches.html"><i class="fa-solid fa-calendar-days"></i> View Matches</a></div></div></article>`;
-    }
-}
+const FALLBACK_IMAGE="https://www.mumbaiindians.com/static-assets/waf-images/c7/6e/c1/16-9/592-444/DAtzKSYFre.jpg";
+const ticketMatches=document.getElementById("ticketMatches");
+function escapeHTML(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
+function formatDate(v){const d=new Date(v);return Number.isNaN(d.getTime())?"DATE TBA":d.toLocaleDateString("en-IN",{weekday:"short",day:"2-digit",month:"short",year:"numeric"}).toUpperCase()}
+function isPast(v){const d=new Date(`${v}T23:59:59`);return !Number.isNaN(d.getTime())&&d.getTime()<Date.now()}
+function createCard(match,tickets){const past=isPast(match.match_date),available=(tickets||[]).reduce((sum,t)=>sum+(Number(t.available_seats)||0),0),first=(tickets||[]).find(t=>(Number(t.available_seats)||0)>0);const card=document.createElement("article");card.className="ticket-card";const book=past?`<span class="book-btn disabled"><i class="fa-solid fa-circle-check"></i> Season Completed</span>`:first?`<a class="book-btn" href="booking.html?match_id=${encodeURIComponent(match.id)}"><i class="fa-solid fa-ticket"></i> Book Tickets</a>`:`<span class="book-btn disabled"><i class="fa-solid fa-clock"></i> Tickets TBA</span>`;card.innerHTML=`<div class="ticket-card-image"><span class="ticket-badge">MI MATCH DAY</span><img src="${FALLBACK_IMAGE}" alt="Mumbai Indians match day" loading="lazy"></div><div class="ticket-card-content"><span class="ticket-date">${escapeHTML(formatDate(match.match_date))}</span><h3>Mumbai Indians vs ${escapeHTML(match.opponent)}</h3><div class="ticket-meta"><span><i class="fa-regular fa-clock"></i>${escapeHTML(String(match.match_time||"Time TBA").slice(0,5))}</span><span><i class="fa-solid fa-location-dot"></i>${escapeHTML(match.venue||"Venue TBA")}, ${escapeHTML(match.city||"")}</span></div><p class="availability-line">${past?"2026 fixture completed":available>0?`${available.toLocaleString("en-IN")} seats currently available":"Ticket categories are not available yet"}</p><div class="ticket-card-actions">${book}<a class="details-btn" href="match-details.html?match_id=${encodeURIComponent(match.id)}">Details</a></div></div>`;return card}
+async function loadTicketMatches(){ticketMatches.innerHTML=`<div class="ticket-loading"><i class="fa-solid fa-spinner fa-spin"></i><p>Loading ticket information...</p></div>`;try{const client=window.MIAuth?.client;if(!client)throw new Error("Supabase client unavailable");const{data:matches,error}=await client.from("matches").select("id,opponent,match_date,match_time,venue,city").order("match_date",{ascending:false});if(error)throw error;if(!matches?.length)throw new Error("No matches found");const ids=matches.map(m=>m.id);const{data:tickets,error:ticketError}=await client.from("tickets").select("id,match_id,category,price,available_seats").in("match_id",ids).order("price",{ascending:true});if(ticketError)console.warn("Ticket category query failed",ticketError);const byMatch=new Map();(tickets||[]).forEach(t=>{if(!byMatch.has(t.match_id))byMatch.set(t.match_id,[]);byMatch.get(t.match_id).push(t)});const upcoming=matches.filter(m=>!isPast(m.match_date));const visible=(upcoming.length?upcoming:matches).slice(0,8);ticketMatches.innerHTML="";if(!upcoming.length){const notice=document.createElement("div");notice.className="ticket-season-notice";notice.innerHTML=`<strong>2026 season schedule completed</strong><p>There are no upcoming Mumbai Indians fixtures in the connected database right now. Historical match records remain available for details, while new booking buttons will appear automatically when future fixtures are added.</p>`;ticketMatches.appendChild(notice)}visible.forEach(match=>ticketMatches.appendChild(createCard(match,byMatch.get(match.id)||[])))}catch(error){console.error("Ticket Match Error:",error);ticketMatches.innerHTML=`<article class="ticket-card"><div class="ticket-card-image"><span class="ticket-badge">MATCH CENTRE</span><img src="${FALLBACK_IMAGE}" alt="Mumbai Indians match information"></div><div class="ticket-card-content"><h3>Ticket service temporarily unavailable</h3><p class="ticket-meta">The ticket database could not be reached. Open the Match Centre to continue browsing fixtures.</p><div class="ticket-card-actions"><a class="book-btn" href="matches.html"><i class="fa-solid fa-calendar-days"></i> View Matches</a></div></div></article>`}}
 loadTicketMatches();
